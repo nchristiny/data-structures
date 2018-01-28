@@ -25,4 +25,7 @@ public interface List {
    boolean isFull();
    /* return true if there are no elements */
    boolean isEmpty();
+   
+   /* adding the reverse all elements method */
+   void reverse();
 }

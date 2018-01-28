@@ -7,7 +7,8 @@
  * @author Nicholas Christiny
  */
  
-public class ArrayList implements List {
+public class ArrayList implements List 
+{
 
    private int[] data;
    private int next;
@@ -55,9 +56,10 @@ public class ArrayList implements List {
    
    public void sort()
    // Don't use Array.sort()
-   // We could even make this more efficient by looping while checking boolean flag
+   // We could even make this more efficient by looping while checking flag
    {  
-      for (int j = 0;j < next;j++) {
+      for (int j = 0;j < next;j++) 
+      {
          for (int i = 1; i < next - j; i++)
          {
             if (data[i] < data[i - 1])
@@ -84,7 +86,8 @@ public class ArrayList implements List {
    public int indexOf(int val)
    // Used in contains() method
    {
-      for(int i = 0;i < next;i++){
+      for(int i = 0;i < next;i++)
+         {
          if (data[i] == val)
             return i;
          }
@@ -108,12 +111,28 @@ public class ArrayList implements List {
    }
    
    public void reverse()
-   {
-   
+   { 
+     for (int i = 0; i < this.size()/2; i++)
+     {
+        if (data[i] != data[this.size() - i - 1]) 
+        // we only want to switch elements if necessary
+        {
+            int temp = data[i];
+            data[i] = data[this.size() - i - 1];
+            data[this.size() - i - 1] = temp;        
+        } 
+        else 
+        {
+            continue;
+        }
+
+     }
+      
    }
     
-   public String toString() {   
-      // may implement iteratable in future
+   public String toString() 
+      {   
+      // able to implement Iteratable in future
       String output = "";  
       for(int i = 0; i < this.size(); i++) 
       {

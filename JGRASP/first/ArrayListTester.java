@@ -40,7 +40,7 @@ public class ArrayListTester {
          myList.set(idx, newVal);
       }      
       System.out.println("Resulting list after changing: ");
-      System.out.println( myList );
+      System.out.println(myList);
       System.out.println();
       for(int i = 0;i < myList.size() * 2;i++)
       {
@@ -59,18 +59,18 @@ public class ArrayListTester {
       myList.sort();
       System.out.println(myList);
       System.out.println();
-            
-//       // Verifies newly instantiated ArrayList is empty
-//       List emptyList = new ArrayList(10); 
-//       System.out.print("Is newly created list empty? ");
-//       System.out.println(emptyList.isEmpty());
       
+      System.out.println("Reversing the list.");
+      myList.reverse();
+      System.out.println(myList);
+      System.out.println();
+
       System.out.println("Removing all the elements from myList!");
        while( myList.isEmpty() == false )
        {
           myList.remove(0);
        }      
-      System.out.println("Size of mySize after emptying = " + myList.size());
+      System.out.println("Size of myList after emptying = " + myList.size());
       System.out.println("myList: " + myList);
       System.out.println("Goodbye!");
    }
