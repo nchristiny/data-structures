@@ -1,0 +1,42 @@
+Adding: 
+16 82 29 45 13 6 75 2 
+myList Size is 8
+16, 82, 29, 45, 13, 6, 75, 2
+
+29 is at index: 2.  removing...
+
+Resulting list after removing: 
+16, 82, 45, 13, 6, 75, 2
+myList size is 7
+
+Changing the 6 at index 4 to 16.
+Changing the 2 at index 6 to 43.
+Changing the 82 at index 1 to 35.
+Resulting list after changing: 
+16, 35, 45, 13, 16, 75, 43
+
+20 is not in the list!
+19 is not in the list!
+72 is not in the list!
+76 is not in the list!
+13 is in the list!
+88 is not in the list!
+92 is not in the list!
+56 is not in the list!
+62 is not in the list!
+64 is not in the list!
+53 is not in the list!
+18 is not in the list!
+17 is not in the list!
+54 is not in the list!
+
+Sorting the list:
+13, 16, 16, 35, 43, 45, 75
+
+Reversing the list.
+75, 45, 43, 35, 16, 16, 13
+
+Removing all the elements from myList!
+Size of myList after emptying = 0
+myList: 
+Goodbye!

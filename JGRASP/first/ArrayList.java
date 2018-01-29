@@ -56,7 +56,7 @@ public class ArrayList implements List
    
    public void sort()
    // Don't use Array.sort()
-   // We could even make this more efficient by looping while checking flag
+   // TODO Looping while checking flag
    {  
       for (int j = 0;j < next;j++) 
       {
@@ -114,8 +114,8 @@ public class ArrayList implements List
    { 
      for (int i = 0; i < this.size()/2; i++)
      {
+        // wish to switch elements only if necessary
         if (data[i] != data[this.size() - i - 1]) 
-        // we only want to switch elements if necessary
         {
             int temp = data[i];
             data[i] = data[this.size() - i - 1];
@@ -132,7 +132,6 @@ public class ArrayList implements List
     
    public String toString() 
       {   
-      // able to implement Iteratable in future
       String output = "";  
       for(int i = 0; i < this.size(); i++) 
       {
@@ -144,5 +143,5 @@ public class ArrayList implements List
             output = output + this.get(i) + ", ";
       }
       return output;
-    }
+   }
 }
