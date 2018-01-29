@@ -1,40 +1,62 @@
 Adding: 
-16 82 29 45 13 6 75 2 
-myList Size is 8
-16, 82, 29, 45, 13, 6, 75, 2
+65 40 75 68 42 3 15 71 53 62 14 99 16 73 27 26 64 88 
+myList Size is 18
+65, 40, 75, 68, 42, 3, 15, 71, 53, 62, 14, 99, 16, 73, 27, 26, 64, 88
 
-29 is at index: 2.  removing...
+53 is at index: 8.  removing...
+3 is at index: 5.  removing...
+64 is at index: 14.  removing...
 
 Resulting list after removing: 
-16, 82, 45, 13, 6, 75, 2
-myList size is 7
+65, 40, 75, 68, 42, 15, 71, 62, 14, 99, 16, 73, 27, 26, 88
+myList size is 15
 
-Changing the 6 at index 4 to 16.
-Changing the 2 at index 6 to 43.
-Changing the 82 at index 1 to 35.
+Changing the 42 at index 4 to 40.
+Changing the 14 at index 8 to 95.
+Changing the 88 at index 14 to 84.
+Changing the 95 at index 8 to 41.
+Changing the 71 at index 6 to 78.
+Changing the 75 at index 2 to 70.
+Changing the 40 at index 1 to 60.
 Resulting list after changing: 
-16, 35, 45, 13, 16, 75, 43
+65, 60, 70, 68, 40, 15, 78, 62, 41, 99, 16, 73, 27, 26, 84
 
-20 is not in the list!
+71 is not in the list!
+70 is in the list!
+14 is not in the list!
+55 is not in the list!
+50 is not in the list!
+32 is not in the list!
+4 is not in the list!
+95 is not in the list!
+31 is not in the list!
+73 is in the list!
+40 is in the list!
 19 is not in the list!
-72 is not in the list!
-76 is not in the list!
-13 is in the list!
-88 is not in the list!
+65 is in the list!
+96 is not in the list!
+89 is not in the list!
+41 is in the list!
+40 is in the list!
+13 is not in the list!
+13 is not in the list!
 92 is not in the list!
-56 is not in the list!
-62 is not in the list!
-64 is not in the list!
-53 is not in the list!
-18 is not in the list!
-17 is not in the list!
-54 is not in the list!
+4 is not in the list!
+4 is not in the list!
+57 is not in the list!
+72 is not in the list!
+29 is not in the list!
+29 is not in the list!
+5 is not in the list!
+21 is not in the list!
+66 is not in the list!
+60 is in the list!
 
 Sorting the list:
-13, 16, 16, 35, 43, 45, 75
+15, 16, 26, 27, 40, 41, 60, 62, 65, 68, 70, 73, 78, 84, 99
 
 Reversing the list.
-75, 45, 43, 35, 16, 16, 13
+99, 84, 78, 73, 70, 68, 65, 62, 60, 41, 40, 27, 26, 16, 15
 
 Removing all the elements from myList!
 Size of myList after emptying = 0

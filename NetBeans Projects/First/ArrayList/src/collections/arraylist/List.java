@@ -1,3 +1,5 @@
+package collections.arraylist;
+
 public interface List {
 
     /* add val to the end of the list */
