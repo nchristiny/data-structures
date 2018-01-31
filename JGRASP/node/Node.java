@@ -1,8 +1,8 @@
 /**
- * Scratch: Fun with Linked Lists
+ * Fun with Linked Lists
  */
-
 public class Node {
+   
    int val;
    Node next;
    

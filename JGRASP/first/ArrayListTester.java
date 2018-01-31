@@ -4,7 +4,7 @@ public class ArrayListTester {
 
     public static void main(String[] args) throws IOException {
         try {
-            // Print STDOUT st ream to text file
+            // Print STDOUT stream to text file
             PrintStream out = new PrintStream(new FileOutputStream("output.txt"));
             System.setOut(out);
 
