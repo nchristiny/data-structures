@@ -1,8 +1,6 @@
 /**
  * Fun with Linked Lists
- */
-package node;
-
+ */ 
 /**
  *
  * @author Nicholas Christiny

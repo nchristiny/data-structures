@@ -1,41 +1,41 @@
 Adding: 
-76 54 13 39 89 83 60 73 83 
+50 54 84 43 24 10 46 21 93 
 myList Size is 9
-76, 54, 13, 39, 89, 83, 60, 73, 83
+50, 54, 84, 43, 24, 10, 46, 21, 93
 
-39 is at index: 3.  removing...
-54 is at index: 1.  removing...
+24 is at index: 4.  removing...
+21 is at index: 6.  removing...
 
 Resulting list after removing: 
-76, 13, 89, 83, 60, 73, 83
+50, 54, 84, 43, 10, 46, 93
 myList size is 7
 
-Changing the 60 at index 4 to 83.
-Changing the 83 at index 3 to 32.
-Changing the 89 at index 2 to 7.
+Changing the 84 at index 2 to 15.
+Changing the 15 at index 2 to 66.
+Changing the 93 at index 6 to 82.
 Resulting list after changing: 
-76, 13, 7, 32, 83, 73, 83
+50, 54, 66, 43, 10, 46, 82
 
-30 is not in the list!
-24 is not in the list!
-20 is not in the list!
-32 is in the list!
-23 is not in the list!
-45 is not in the list!
-74 is not in the list!
-15 is not in the list!
-3 is not in the list!
+92 is not in the list!
+27 is not in the list!
+90 is not in the list!
+56 is not in the list!
+91 is not in the list!
+56 is not in the list!
+90 is not in the list!
 26 is not in the list!
-57 is not in the list!
-28 is not in the list!
-93 is not in the list!
-36 is not in the list!
+66 is in the list!
+38 is not in the list!
+37 is not in the list!
+17 is not in the list!
+29 is not in the list!
+75 is not in the list!
 
 Sorting the list:
-7, 13, 32, 73, 76, 83, 83
+10, 43, 46, 50, 54, 66, 82
 
 Reversing the list.
-83, 83, 76, 73, 32, 13, 7
+82, 66, 54, 50, 46, 43, 10
 
 Removing all the elements from myList!
 Size of myList after emptying = 0

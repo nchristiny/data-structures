@@ -1,12 +1,10 @@
-/*
+/**
  * CS 304 Assignment 1: Customizing Java class and interface
  */
 package collections.arraylist;
 
 /**
  * @author Nicholas Christiny
- * @param data Array of elements
- * @param next integer pointing to next in array
  */
 public class ArrayList implements List {
 
@@ -18,11 +16,13 @@ public class ArrayList implements List {
         next = 0;
     }
 
+    @Override
     public void add(int val) {
         data[next] = val;
         next = next + 1;
     }
 
+    @Override
     public int remove(int idx) // @return removed value and shift all higher indices, or return -1 
     {
         if (idx >= next || idx < 0) {
@@ -37,16 +37,19 @@ public class ArrayList implements List {
         return removedData;
     }
 
+    @Override
     public int get(int idx) {
         int value;
         value = this.data[idx];
         return value;
     }
 
+    @Override
     public void set(int idx, int val) {
         data[idx] = val;
     }
 
+    @Override
     public void sort() // Don't use Array.sort()
     // TODO Looping while checking flag
     {
@@ -61,15 +64,18 @@ public class ArrayList implements List {
         }
     }
 
+    @Override
     public int size() {
         int count = this.next;
         return count;
     }
 
+    @Override
     public void clear() {
         next = 0;
     }
 
+    @Override
     public int indexOf(int val) // Used in contains() method
     {
         for (int i = 0; i < next; i++) {
@@ -80,19 +86,23 @@ public class ArrayList implements List {
         return -1;
     }
 
+    @Override
     public boolean isEmpty() {
         return (this.size() == 0);
     }
 
+    @Override
     public boolean isFull() {
         // never full
         return false;
     }
 
+    @Override
     public boolean contains(int val) {
         return (indexOf(val) != -1);
     }
 
+    @Override
     public void reverse() {
         for (int i = 0; i < this.size() / 2; i++) {
             // wish to switch elements only if necessary
@@ -104,6 +114,7 @@ public class ArrayList implements List {
         }
     }
 
+    @Override
     public String toString() {
         String output = "";
         for (int i = 0; i < this.size(); i++) {

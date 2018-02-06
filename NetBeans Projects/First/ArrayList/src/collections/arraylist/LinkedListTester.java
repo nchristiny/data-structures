@@ -1,18 +1,18 @@
 package collections.arraylist;
 
-import java.io.*;
+//import java.io.*;
 
-public class ArrayListTester {
+public class LinkedListTester {
 
-    public static void main(String[] args) throws IOException {
-        try {
+    public static void main(String[] args) {
+//        try {
             // Print STDOUT stream to text file
-            PrintStream out = new PrintStream(new FileOutputStream("output.txt"));
-            System.setOut(out);
-
+//            PrintStream out = new PrintStream(new FileOutputStream("output.txt"));
+//            System.setOut(out);
+            
             int maxVal = 100;
             int numVals = (int) (Math.random() * 16) + 8;
-            List myList = new ArrayList(numVals);
+            List myList = new LinkedList(numVals);
             System.out.println("Adding: ");
 
             for (int i = 0; i < numVals; i++) {
@@ -66,15 +66,29 @@ public class ArrayListTester {
             System.out.println(myList);
             System.out.println();
 
-            System.out.println("Removing all the elements from myList!");
-            while (myList.isEmpty() == false) {
-                myList.remove(0);
-            }
+//            System.out.println("Removing all the elements from myList!");
+//            while (myList.isEmpty() == false) {
+//                myList.remove(0);
+//            }
             System.out.println("Size of myList after emptying = " + myList.size());
             System.out.println("myList: " + myList);
             System.out.println("Goodbye!");
-        } catch (FileNotFoundException e) {
-            System.out.println(e);
-        }
+            
+//            Node a;
+//            a = new Node(3);
+//            System.out.println(a.data);
+//            
+//            System.out.println(a.next);
+//            
+//            List myList2 = new LinkedList(5);
+//
+//            myList2.add(3);
+//            
+//            System.out.println(myList2);
+
+//        } catch (FileNotFoundException e) {
+//            System.out.println(e);
+//        }
+        
     }
 }
