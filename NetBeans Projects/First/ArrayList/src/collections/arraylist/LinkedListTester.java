@@ -12,7 +12,7 @@ public class LinkedListTester {
             
             int maxVal = 100;
             int numVals = (int) (Math.random() * 16) + 8;
-            List myList = new LinkedList(numVals);
+            List myList = new LinkedList(); // we don't need to set sizes on reference based Linked List
             System.out.println("Adding: ");
 
             for (int i = 0; i < numVals; i++) {
@@ -66,25 +66,13 @@ public class LinkedListTester {
             System.out.println(myList);
             System.out.println();
 
-//            System.out.println("Removing all the elements from myList!");
+            System.out.println("Removing all the elements from myList!");
 //            while (myList.isEmpty() == false) {
 //                myList.remove(0);
 //            }
             System.out.println("Size of myList after emptying = " + myList.size());
             System.out.println("myList: " + myList);
             System.out.println("Goodbye!");
-            
-//            Node a;
-//            a = new Node(3);
-//            System.out.println(a.data);
-//            
-//            System.out.println(a.next);
-//            
-//            List myList2 = new LinkedList(5);
-//
-//            myList2.add(3);
-//            
-//            System.out.println(myList2);
 
 //        } catch (FileNotFoundException e) {
 //            System.out.println(e);

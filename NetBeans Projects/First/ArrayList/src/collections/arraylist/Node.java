@@ -4,10 +4,7 @@
 package collections.arraylist;
 
 /**
- *
  * @author Nicholas Christiny
- * @param data array of int value
- * @param next reference to next node
  */
 public class Node {
 
