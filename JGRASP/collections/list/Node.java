@@ -13,13 +13,13 @@ public class Node {
       next = null;
    }
    
-   public static void display(Node n) {
-      while(n != null) {
-         System.out.print(n + " ");
-         n = n.next;
-      }
-      System.out.println();
-   }
+//    public static void display(Node n) {
+//       while(n != null) {
+//          System.out.print(n + " ");
+//          n = n.next;
+//       }
+//       System.out.println();
+//    }
    
    @Override
    public String toString() {
