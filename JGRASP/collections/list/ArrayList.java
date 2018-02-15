@@ -6,7 +6,8 @@
  *
  * @author Nicholas Christiny
  */
- 
+package collections.list; 
+
 public class ArrayList implements List 
 {
 

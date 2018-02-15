@@ -1,9 +1,8 @@
-// package collections.list;
-// import collections.node;
-// import list;
+package collections.list; 
+
 public class LinkedList implements List {
    
-   collections.Node root;
+   Node root;
    /* Default constructor */
    public LinkedList() {}
    /* Contructor from fileName */
@@ -37,7 +36,7 @@ public class LinkedList implements List {
       return -1;
    }
    
-   public boolean contains() {
+   public boolean contains(int v) {
       return false;
    }
    
@@ -50,6 +49,18 @@ public class LinkedList implements List {
    }
    
    public void sort() {
+   
+   }
+   
+   public void reverse() {
+   
+   }
+   
+   public void set(int idx, int val) {
+   
+   }
+   
+   get int set(int idx, int val) {
    
    }
    

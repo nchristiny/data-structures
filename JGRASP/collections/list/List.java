@@ -1,3 +1,5 @@
+package collections.list; 
+
 public interface List {
 
     /* add val to the end of the list */
