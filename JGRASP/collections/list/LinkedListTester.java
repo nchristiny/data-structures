@@ -67,13 +67,13 @@ public class LinkedListTester
       System.out.println("Size = " + myList.size());
       System.out.println( myList );
       System.out.println( "------ Inserting 20 values ------" );
-//       for( int i=0; i<20; i++ ) 
-//       {
-//          int idx = (int)(Math.random() * myList.size());
-//          int val = (int)(Math.random()*50)+1;
-//          System.out.println( "Inserting " + val + " at index " + idx );
-//          myList.insert(idx, val);         
-//       }
+      for( int i=0; i<20; i++ ) 
+      {
+         int idx = (int)(Math.random() * myList.size());
+         int val = (int)(Math.random()*50)+1;
+         System.out.println( "Inserting " + val + " at index " + idx );
+         myList.insert(idx, val);         
+      }
       System.out.println( "Size = " + myList.size());
       System.out.println( myList );
       System.out.println( "Goodbye!" );

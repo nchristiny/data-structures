@@ -119,7 +119,20 @@ public class LinkedList implements List {
    }
    
    public void insert( int idx, int val ) {
-   
+      // throw exception if not in range
+      Node t = new Node(val);
+      if (idx == 0) {
+         // edge case of inserting new node as root at index 0
+         t.next = root;
+         root = t;
+      } else {
+         Node r = root;
+         for(int i = 0; i < idx - 1; i++) {
+            r = r.next;
+         }
+         t.next = r.next;
+         r.next = t;
+      } 
    }
    
    public String toString() {

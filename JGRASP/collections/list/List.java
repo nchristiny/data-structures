@@ -41,4 +41,7 @@ public interface List {
 
     /* returned reversed elements */
     void reverse();
+    
+    /* insert a new element at specified index */
+    void insert( int idx, int val );
 }
