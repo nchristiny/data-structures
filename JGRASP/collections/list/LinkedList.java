@@ -1,14 +1,13 @@
 package collections.list; 
+import java.io.*;
 
 public class LinkedList implements List {
    
    private Node root;
-//    private Node tail;  // tail.next always null
    
    /* Default constructor */
    public LinkedList() {
       root = null;
-//       tail = null;
    }
    
    /* Contructor from fileName */
@@ -23,8 +22,6 @@ public class LinkedList implements List {
          root = tmp;  // 1 element now in LinkedList
       }
       else {
-//          tail.next = tmp; // Add to existing tail reference next value,
-//          tail = tmp;      // and update tail reference 
          Node r = root;
          while(r.next != null) {
             r = r.next;
@@ -42,6 +39,7 @@ public class LinkedList implements List {
    }
    
    public int indexOf(int v) {
+      // Not implemented
       return -1;
    }
    
@@ -57,7 +55,9 @@ public class LinkedList implements List {
    }
    
    public void clear() {
-   
+     while(this.isEmpty() == false) {
+         this.remove(0);
+     }    
    }
    
    public int size() {
@@ -73,15 +73,29 @@ public class LinkedList implements List {
    }
    
    public void sort() {
-   
+      // TODO implement this correctly, currently not sorting
+      if (!(this.isEmpty() || this.size() == 1)) {
+         // if LinkedList is NOT empty OR contains more than one element,
+         // then continue sort
+         Node r = root;
+         Node r2 = r.next;
+         Node tmp;
+         while(r.next.next != null) {
+            if(r.data > r2.data) {
+               tmp = r;
+               r.data = r2.data;
+               r2.data = tmp.data;
+            }
+            r = r.next;
+         }
+      }
    }
    
-   public void reverse() {
-   
-   }
-   
-   public void set(int idx, int val) {
+   public void set(int idx, int val) throws IndexOutOfBoundsException {
       // throw exception if not in range
+      if (idx < 0 || idx > this.size()) {
+         throw new IndexOutOfBoundsException("Index invalid");
+      }
       Node r = root;
       if (!this.isEmpty()) { // if LinkedList is not empty
           for (int i = 0; i < idx; i++) {
@@ -91,8 +105,11 @@ public class LinkedList implements List {
       r.data = val;      
    }
    
-   public int get(int idx) {
+   public int get(int idx) throws IndexOutOfBoundsException {
       // throw exception if not in range
+      if (idx < 0 || idx > this.size()) {
+         throw new IndexOutOfBoundsException("Index invalid");
+      }
       Node r = root;
       if (!this.isEmpty()) { // if LinkedList is not empty
           for (int i = 0; i < idx; i++) {
@@ -102,8 +119,11 @@ public class LinkedList implements List {
       return r.data; 
    }
    
-   public int remove(int idx){
+   public int remove(int idx) throws IndexOutOfBoundsException {
       // throw exception if not in range
+      if (idx < 0 || idx > this.size()) {
+         throw new IndexOutOfBoundsException("Index invalid");
+      }
       if (idx == 0) {
          int removed = root.data;
          root = root.next;
@@ -118,8 +138,11 @@ public class LinkedList implements List {
       return removed;
    }
    
-   public void insert( int idx, int val ) {
+   public void insert( int idx, int val ) throws IndexOutOfBoundsException {
       // throw exception if not in range
+      if (idx < 0 || idx > this.size()) {
+         throw new IndexOutOfBoundsException("Index invalid");
+      }
       Node t = new Node(val);
       if (idx == 0) {
          // edge case of inserting new node as root at index 0
@@ -136,7 +159,10 @@ public class LinkedList implements List {
    }
    
    public String toString() {
-      String output = "";        
+      String output = ""; 
+      if (this.isEmpty()) {
+         return output;
+      }       
       for (int i = 0; i < this.size() + 1; i++) {
           if (i == this.size()) {
               output = output + this.get(i);

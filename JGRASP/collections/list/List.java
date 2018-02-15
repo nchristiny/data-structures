@@ -39,9 +39,6 @@ public interface List {
     /* return true if there are no elements */
     boolean isEmpty();
 
-    /* returned reversed elements */
-    void reverse();
-    
     /* insert a new element at specified index */
     void insert( int idx, int val );
 }

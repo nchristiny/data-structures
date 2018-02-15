@@ -1,4 +1,5 @@
 package collections.list;
+import java.io.*;
 
 public class LinkedListTester
 {
@@ -19,7 +20,7 @@ public class LinkedListTester
       System.out.println("Size = " + myList.size());
       System.out.println( myList );   
       
-      System.out.println("Sorting: ");  // TODO
+      System.out.println("Sorting: ");  // TODO improve sort method
       myList.sort();
       System.out.println( myList );   
       
@@ -59,11 +60,9 @@ public class LinkedListTester
       myList.sort();
       System.out.println( myList );
       
-//       System.out.println( "Removing all the elements." );
-//       while( myList.isEmpty() == false )
-//       {
-//          myList.remove(0);
-//       }      
+      System.out.println( "Removing all the elements." );
+      // Implementing LinkedList clear() method   
+      myList.clear();
       System.out.println("Size = " + myList.size());
       System.out.println( myList );
       System.out.println( "------ Inserting 20 values ------" );
@@ -73,8 +72,9 @@ public class LinkedListTester
          int val = (int)(Math.random()*50)+1;
          System.out.println( "Inserting " + val + " at index " + idx );
          myList.insert(idx, val);         
-      }
-      System.out.println( "Size = " + myList.size());
+       }
+      System.out.println( "Size = " + myList.size());  
+      // off-by-one size discrepancy i.e. size 19 but should be 20
       System.out.println( myList );
       System.out.println( "Goodbye!" );
    }
