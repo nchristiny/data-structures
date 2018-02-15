@@ -26,7 +26,7 @@ public class LinkedList implements List {
 //          tail.next = tmp; // Add to existing tail reference next value,
 //          tail = tmp;      // and update tail reference 
          Node r = root;
-         while (r.next != null) {
+         while(r.next != null) {
             r = r.next;
          }
          r.next = tmp;
@@ -88,7 +88,18 @@ public class LinkedList implements List {
    }
    
    public int remove(int idx){
-      return -1;
+      if (idx == 0) {
+         int removed = root.data;
+         root = root.next;
+         return removed;
+      }
+      Node r = root;
+      for(int i = 0; i < idx - 1; i++) {
+         r = r.next;
+      }
+      int removed = r.next.data;
+      r.next = r.next.next;
+      return removed;
    }
    
    public void insert( int idx, int val ) {
