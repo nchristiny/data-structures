@@ -46,6 +46,13 @@ public class LinkedList implements List {
    }
    
    public boolean contains(int v) {
+      Node r = root;
+      while(r != null) { // while LinkedList is not empty
+         if (v == r.data){
+            return true;
+            }
+            r = r.next;
+      } 
       return false;
    }
    
@@ -74,10 +81,18 @@ public class LinkedList implements List {
    }
    
    public void set(int idx, int val) {
-   
+      // throw exception if not in range
+      Node r = root;
+      if (!this.isEmpty()) { // if LinkedList is not empty
+          for (int i = 0; i < idx; i++) {
+              r = r.next;
+          }
+      }
+      r.data = val;      
    }
    
    public int get(int idx) {
+      // throw exception if not in range
       Node r = root;
       if (!this.isEmpty()) { // if LinkedList is not empty
           for (int i = 0; i < idx; i++) {
@@ -88,6 +103,7 @@ public class LinkedList implements List {
    }
    
    public int remove(int idx){
+      // throw exception if not in range
       if (idx == 0) {
          int removed = root.data;
          root = root.next;
