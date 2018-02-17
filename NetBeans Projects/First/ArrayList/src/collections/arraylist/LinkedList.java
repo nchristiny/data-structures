@@ -1,115 +1,188 @@
 /**
- * CS 304 Assignment 2: more fun with LinkedList & nodes
+ * LinkedList.java
+ * HW 2
  */
-package collections.arraylist;
+package collections.list;
 
 public class LinkedList implements List {
-    
+
     private Node root;
-    private Node tail;  // tail.next always null
-    
+
+    /* Default constructor */
     public LinkedList() {
-        // creates empty LinkedList
         root = null;
-        tail = null;
     }
-    /* TODO Contructor from fileName */
-    public LinkedList(String fileName) {}
-    /* TODO Contructor from array */
-    public LinkedList(int[] A) {}
-    
-    @Override
-    public void add(int val) {
-        // Append to LinkedList i.e. after tail
-        Node tmp = new Node(val);
-        if(this.isEmpty()) {
-            root = tmp; 
-            tail = root; // Now 1 element in LinkedList
-        } 
-        else {
-            tail.next = tmp; // Add to existing tail reference next value
-            tail = tmp; // update tail reference 
+
+    /* Contructor from fileName */
+    public LinkedList(String fileName) {
+    }
+
+    /* Contructor from array */
+    public LinkedList(int[] A) {
+    }
+
+    public void add(int v) {
+        // append new node
+        Node tmp = new Node(v);
+        if (this.isEmpty()) {
+            root = tmp;  // 1 element now in LinkedList
+        } else {
+            Node r = root;
+            while (r.next != null) {
+                r = r.next;
+            }
+            r.next = tmp;
         }
     }
-    
-    @Override
-    public int remove(int idx) {
-        if (idx >= this.size() || idx < 0) {
-            return -1;
-        }
+
+    public boolean isEmpty() {
+        return (root == null);
+    }
+
+    public boolean isFull() {
+        return false;
+    }
+
+    public int indexOf(int v) {
+        // Not implemented
         return -1;
     }
 
-    @Override
-    @SuppressWarnings("null")
-    public int get(int idx) {
-        // if requested index is outside LinkedList, throw exception
-//        if (idx >= this.size() || idx < 0 ) {
-//            throw new IllegalArgumentException("Invalid Index");
-//        }
-        
+    public boolean contains(int v) {
+        Node r = root;
+        while (r != null) {
+            // while LinkedList is not empty
+            if (v == r.data) {
+                return true;
+            }
+            r = r.next;
+        }
+        return false;
+    }
+
+    public void clear() {
+        while (this.isEmpty() == false) {
+            this.remove(0);
+        }
+    }
+
+    public int size() {
+        Node r = root;
+        int count = 1;
+        if (r != null) {
+            while (r.next != null) {
+                count++;
+                r = r.next;
+            }
+        } else {
+            // LinkedList is empty
+            return 0;
+        }
+        return count;
+    }
+
+    public void sort() {
+        if (this.isEmpty() || this.size() == 1) {
+            // if LinkedList is (empty OR contains one element)
+            System.out.println("Already sorted");
+        } else {
+            // do the sort
+            boolean swapped = true;
+            // LinkedList is sorted when swapped is false after a pass
+            while (swapped) {
+                swapped = false;
+                Node r = root;
+                Node r2 = r.next;
+                int tmp;
+                while (r.next != null) {
+                    if (r.data > r2.data) {
+                        tmp = r.data;
+                        r.data = r2.data;
+                        r2.data = tmp;
+                        swapped = true;
+                    }
+                    r = r.next;
+                    r2 = r.next;
+                }
+            }
+        }
+    }
+
+    public void set(int idx, int val) throws IndexOutOfBoundsException {
+        // throw exception if not in range
+        if (idx < 0 || idx > this.size()) {
+            throw new IndexOutOfBoundsException("Index invalid");
+        }
         Node r = root;
         if (!this.isEmpty()) { // if LinkedList is not empty
             for (int i = 0; i < idx; i++) {
                 r = r.next;
             }
         }
-        return r.data; 
+        r.data = val;
     }
 
-    @Override
-    public void set(int idx, int val) {
-//        values[idx].data = val;
-    }
-
-    @Override
-    public void sort() {
-        
-    }
-    
-    @Override
-    public int size() {
-        Node r = root;
-        int count = 0;            
-        if (r != null) {
-            while(r.next != null){
-                count++;
-                r = r.next;
-            }   
+    public int get(int idx) throws IndexOutOfBoundsException {
+        // throw exception if not in range
+        if (idx < 0 || idx >= this.size()) {
+            throw new IndexOutOfBoundsException("Index invalid");
         }
-        return count;
+        Node r = root;
+        if (!this.isEmpty()) {
+            // if LinkedList is not empty
+            for (int i = 0; i < idx; i++) {
+                r = r.next;
+            }
+        }
+        return r.data;
     }
 
-    @Override
-    public void clear() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public int remove(int idx) throws IndexOutOfBoundsException {
+        // throw exception if not in range
+        if (idx < 0 || idx > this.size()) {
+            throw new IndexOutOfBoundsException("Index invalid");
+        }
+        if (idx == 0) {
+            int removed = root.data;
+            root = root.next;
+            return removed;
+        }
+        Node r = root;
+        for (int i = 0; i < idx - 1; i++) {
+            r = r.next;
+        }
+        int removed = r.next.data;
+        r.next = r.next.next;
+        return removed;
     }
 
-    @Override
-    public boolean contains(int val) {
-        return false;
+    public void insert(int idx, int val) throws IndexOutOfBoundsException {
+        // throw exception if not in range
+        if (idx < 0 || idx > this.size()) {
+            throw new IndexOutOfBoundsException("Index invalid");
+        }
+        Node t = new Node(val);
+        if (idx == 0) {
+            // edge case of inserting new node at index 0 (root)
+            t.next = root;
+            root = t;
+        } else {
+            Node r = root;
+            for (int i = 0; i < idx - 1; i++) {
+                r = r.next;
+            }
+            t.next = r.next;
+            r.next = t;
+        }
     }
 
-    @Override
-    public boolean isFull() {
-        return false;
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return (root == null);
-    }
-
-    @Override
-    public void reverse() {
-
-    }
-    
-    @Override
     public String toString() {
-        String output = "";        
-        for (int i = 0; i < this.size() + 1; i++) {
-            if (i == this.size()) {
+        String output = "";
+        if (this.isEmpty()) {
+            return output;
+        }
+        for (int i = 0; i < this.size(); i++) {
+            if (i == this.size() - 1) {
                 output = output + this.get(i);
             } else {
                 output = output + this.get(i) + ", ";
@@ -117,24 +190,4 @@ public class LinkedList implements List {
         }
         return output;
     }
-
-//    public int indexOfTail() {
-//        // The index of the tail is (length of values - 1), otherwise -1 
-//        if (this.isEmpty())
-//            return -1;
-//        return values.length - 1;
-//    }
-
-    @Override
-    public int indexOf(int val) {
-    // TODO implement this later YAGNI 
-    //        for (int i = 0; i < this.size(); i++) {
-//            if (values[i].data == val) {
-//                return i;
-//            }           
-//        }
-        return -1;
-    }
-
-    
 }

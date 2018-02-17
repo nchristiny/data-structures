@@ -1,29 +1,31 @@
-package collections.arraylist;
+/**
+ * LinkedListTester.java
+ */
+package collections.list;
 
-//import java.io.*;
+import java.io.*;
 
 public class LinkedListTester {
 
-    public static void main(String[] args) {
-//        try {
-            // Print STDOUT stream to text file
-//            PrintStream out = new PrintStream(new FileOutputStream("output.txt"));
-//            System.setOut(out);
-            
+    public static void main(String[] args) throws RuntimeException {
+        try {
             int maxVal = 100;
+            List myList = new LinkedList();
             int numVals = (int) (Math.random() * 16) + 8;
-            List myList = new LinkedList(); // we don't need to set sizes on reference based Linked List
+            System.out.println("Size = " + myList.size());
             System.out.println("Adding: ");
-
             for (int i = 0; i < numVals; i++) {
                 int val = (int) (Math.random() * maxVal) + 1;
-                myList.add(val);
                 System.out.print(val + " ");
+                myList.add(val);
             }
             System.out.println();
-            System.out.println("myList Size is " + myList.size());
+            System.out.println("Size = " + myList.size());
             System.out.println(myList);
-            System.out.println();
+
+            System.out.println("Sorting: ");
+            myList.sort();
+            System.out.println(myList);
 
             for (int i = 0; i < myList.size() / 4; i++) {
                 int idx = (int) (Math.random() * myList.size());
@@ -31,12 +33,9 @@ public class LinkedListTester {
                 System.out.println(val + " is at index: " + idx + ".  removing...");
                 myList.remove(idx);
             }
-            System.out.println();
-            System.out.println("Resulting list after removing: ");
+            System.out.println("Resulting list: ");
+            System.out.println("Size = " + myList.size());
             System.out.println(myList);
-            System.out.println("myList size is " + myList.size());
-            System.out.println();
-
             for (int i = 0; i < myList.size() / 2; i++) {
                 int idx = (int) (Math.random() * myList.size());
                 int val = myList.get(idx);
@@ -44,9 +43,8 @@ public class LinkedListTester {
                 System.out.println("Changing the " + val + " at index " + idx + " to " + newVal + ".");
                 myList.set(idx, newVal);
             }
-            System.out.println("Resulting list after changing: ");
+            System.out.println("Resulting list: ");
             System.out.println(myList);
-            System.out.println();
             for (int i = 0; i < myList.size() * 2; i++) {
                 int val = (int) (Math.random() * maxVal) + 1;
                 if (myList.contains(val)) {
@@ -55,28 +53,27 @@ public class LinkedListTester {
                     System.out.println(val + " is not in the list!");
                 }
             }
-            System.out.println();
             System.out.println("Sorting the list:");
             myList.sort();
             System.out.println(myList);
-            System.out.println();
 
-            System.out.println("Reversing the list.");
-            myList.reverse();
+            System.out.println("Removing all the elements.");
+            // Implementing LinkedList clear() method   
+            myList.clear();
+            System.out.println("Size = " + myList.size());
             System.out.println(myList);
-            System.out.println();
-
-            System.out.println("Removing all the elements from myList!");
-//            while (myList.isEmpty() == false) {
-//                myList.remove(0);
-//            }
-            System.out.println("Size of myList after emptying = " + myList.size());
-            System.out.println("myList: " + myList);
+            System.out.println("------ Inserting 20 values ------");
+            for (int i = 0; i < 20; i++) {
+                int idx = (int) (Math.random() * myList.size());
+                int val = (int) (Math.random() * 50) + 1;
+                System.out.println("Inserting " + val + " at index " + idx);
+                myList.insert(idx, val);
+            }
+            System.out.println("Size = " + myList.size());
+            System.out.println(myList);
             System.out.println("Goodbye!");
-
-//        } catch (FileNotFoundException e) {
-//            System.out.println(e);
-//        }
-        
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println(e);
+        }
     }
 }

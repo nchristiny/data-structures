@@ -1,7 +1,7 @@
 /**
- * List.java 
+ * List.java
  */
- package collections.list; 
+package collections.list;
 
 public interface List {
 
@@ -43,5 +43,5 @@ public interface List {
     boolean isEmpty();
 
     /* insert a new element at specified index */
-    void insert( int idx, int val );
+    void insert(int idx, int val);
 }
