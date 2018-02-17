@@ -78,7 +78,6 @@ public class LinkedListTester
          myList.insert(idx, val);         
        }
       System.out.println( "Size = " + myList.size());  
-      // off-by-one size discrepancy i.e. size 19 but should be 20
       System.out.println( myList );
       System.out.println( "Goodbye!" );
    }

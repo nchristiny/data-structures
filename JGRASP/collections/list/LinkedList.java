@@ -49,7 +49,8 @@ public class LinkedList implements List {
    
    public boolean contains(int v) {
       Node r = root;
-      while(r != null) { // while LinkedList is not empty
+      while(r != null) {
+         // while LinkedList is not empty
          if (v == r.data){
             return true;
             }
@@ -66,12 +67,15 @@ public class LinkedList implements List {
    
    public int size() {
       Node r = root;
-      int count = 0;            
+      int count = 1;            
       if (r != null) {
           while(r.next != null) {
               count++;
               r = r.next;
           }   
+      } else {
+         // LinkedList is empty
+         return 0;
       }
       return count;
    }
@@ -119,11 +123,12 @@ public class LinkedList implements List {
    
    public int get(int idx) throws IndexOutOfBoundsException {
       // throw exception if not in range
-      if (idx < 0 || idx > this.size()) {
+      if (idx < 0 || idx >= this.size()) {
          throw new IndexOutOfBoundsException("Index invalid");
       }
       Node r = root;
-      if (!this.isEmpty()) { // if LinkedList is not empty
+      if (!this.isEmpty()) { 
+          // if LinkedList is not empty
           for (int i = 0; i < idx; i++) {
               r = r.next;
           }
@@ -157,7 +162,7 @@ public class LinkedList implements List {
       }
       Node t = new Node(val);
       if (idx == 0) {
-         // edge case of inserting new node as root at index 0
+         // edge case of inserting new node at index 0 (root)
          t.next = root;
          root = t;
       } else {
@@ -175,8 +180,8 @@ public class LinkedList implements List {
       if (this.isEmpty()) {
          return output;
       }       
-      for (int i = 0; i < this.size() + 1; i++) {
-          if (i == this.size()) {
+      for (int i = 0; i < this.size(); i++) {
+          if (i == this.size() - 1) {
               output = output + this.get(i);
           } else {
               output = output + this.get(i) + ", ";
