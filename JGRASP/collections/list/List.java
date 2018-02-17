@@ -1,4 +1,7 @@
-package collections.list; 
+/**
+ * List.java 
+ */
+ package collections.list; 
 
 public interface List {
 

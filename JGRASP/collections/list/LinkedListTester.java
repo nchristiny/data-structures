@@ -1,4 +1,8 @@
-package collections.list;
+/**
+ * LinkedListTester.java 
+ */
+ 
+ package collections.list;
 import java.io.*;
 
 public class LinkedListTester
@@ -20,7 +24,7 @@ public class LinkedListTester
       System.out.println("Size = " + myList.size());
       System.out.println( myList );   
       
-      System.out.println("Sorting: ");  // TODO improve sort method
+      System.out.println("Sorting: ");
       myList.sort();
       System.out.println( myList );   
       

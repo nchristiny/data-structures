@@ -1,5 +1,5 @@
 /**
- * Fun with Linked Lists
+ * Node.java 
  */
 package collections.list; 
 
@@ -12,14 +12,6 @@ public class Node {
       data = v;
       next = null;
    }
-   
-//    public static void display(Node n) {
-//       while(n != null) {
-//          System.out.print(n + " ");
-//          n = n.next;
-//       }
-//       System.out.println();
-//    }
    
    @Override
    public String toString() {

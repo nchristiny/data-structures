@@ -97,7 +97,7 @@ public class LinkedList implements List {
 
     @Override
     public boolean isEmpty() {
-        return (root == null && this.size() == 0);
+        return (root == null);
     }
 
     @Override

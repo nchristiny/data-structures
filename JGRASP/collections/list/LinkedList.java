@@ -1,3 +1,7 @@
+/**
+ * LinkedList.java
+ * HW 2  
+ */
 package collections.list; 
 import java.io.*;
 
@@ -72,22 +76,30 @@ public class LinkedList implements List {
       return count;
    }
    
-   public void sort() {
-      // TODO implement this correctly, currently not sorting
-      if (!(this.isEmpty() || this.size() == 1)) {
-         // if LinkedList is NOT empty OR contains more than one element,
-         // then continue sort
-         Node r = root;
-         Node r2 = r.next;
-         Node tmp;
-         while(r.next.next != null) {
-            if(r.data > r2.data) {
-               tmp = r;
-               r.data = r2.data;
-               r2.data = tmp.data;
-            }
-            r = r.next;
-         }
+   public void sort() { 
+      if (this.isEmpty() || this.size() == 1) {
+          // if LinkedList is (empty OR contains one element)
+          System.out.println("Already sorted");
+      } else { 
+          // do the sort
+          boolean swapped = true;
+          // LinkedList is sorted when swapped is false after a pass
+          while(swapped) {
+            swapped = false;
+            Node r = root;
+            Node r2 = r.next;
+            int tmp;
+            while(r.next != null) {
+               if(r.data > r2.data) {
+                     tmp = r.data;
+                     r.data = r2.data;
+                     r2.data = tmp;
+                     swapped = true;
+                  }
+                  r = r.next;
+                  r2 = r.next;
+               }
+          }
       }
    }
    

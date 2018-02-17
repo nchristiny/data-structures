@@ -3,7 +3,7 @@ import java.io.*;
 
 public class ArrayListTester {
 
-    public static void main(String[] args) throws IOException {
+//     public static void main(String[] args) throws IOException {
 //         try {
 //             // Print STDOUT stream to text file
 //             PrintStream out = new PrintStream(new FileOutputStream("output.txt"));
