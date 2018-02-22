@@ -130,6 +130,10 @@ public class ArrayList implements List
      }
       
    }
+   
+   public void insert(int idx, int val){
+   
+   }
     
    public String toString() 
       {   

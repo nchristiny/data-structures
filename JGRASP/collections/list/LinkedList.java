@@ -19,6 +19,9 @@ public class LinkedList implements List {
 
     /* Contructor from array */
     public LinkedList(int[] A) {
+        for (int i = 0; i <= A.length - 1; i++) {
+            this.add(A[i]);
+        }
     }
 
     public void add(int v) {
