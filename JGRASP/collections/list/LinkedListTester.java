@@ -80,8 +80,6 @@ public class LinkedListTester {
             System.out.println("Creating a new LinkedList from an array of 6 elements.");
             System.out.println("Size = " + myList2.size());
             System.out.println(myList2);
-            
-            
             System.out.println("Goodbye!");
         } catch (IndexOutOfBoundsException e) {
             System.out.println(e);
