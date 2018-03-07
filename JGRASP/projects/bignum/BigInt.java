@@ -18,8 +18,36 @@ public class BigInt
       /* set data from num */
    }
    
+   public BigInt(BigInt num) {
+      /* create duplicate of num, data reference should be new */
+
+   }
+   
+   public BigInt abs(BigInt a) {
+      BigInt b = new BigInt();
+      b.isNeg = false;
+      return b;
+   }
+   
+   /* return 0 if equal, - value if lesser, + value if greater */
+   public int compareTo(BigInt b) {
+      return 0;
+   }
+   
+   // TODO implementing add, subtract, and multiplication, division, abs, compareTo
+   public BigInt add(BigInt n) {
+      return null;
+   }
+   
+   public BigInt subtract(BigInt n) {
+      /* Subtract n from this - flip if n greater than this and negate
+         Implementing abs to called here */
+      return null;
+
+   }   
+   
    public String toFormattedString() {
-      /* formatting output with commas */
+      /* formatting output 'nicely' */
       return "return";
    }
    
