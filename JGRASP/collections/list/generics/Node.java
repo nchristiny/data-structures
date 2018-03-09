@@ -48,6 +48,8 @@ public class Node<T> {
        System.out.println(genericLinkedList2); 
        genericLinkedList2.set(1, 1300);
        System.out.println(genericLinkedList2); 
+       genericLinkedList2.insert(1, 42); 
+       System.out.println(genericLinkedList2); 
 
    }
 }

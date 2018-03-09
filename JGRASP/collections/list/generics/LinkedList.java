@@ -126,6 +126,10 @@ public class LinkedList<T> implements List<T> {
     }
 
     public T get(int idx) throws IndexOutOfBoundsException {
+        // throw exception if not in range
+        if (idx < 0 || idx > this.size()) {
+            throw new IndexOutOfBoundsException("Index invalid");
+        }
         Node<T> r = root;
         if (!this.isEmpty()) {
             // if LinkedList is not empty
@@ -137,6 +141,10 @@ public class LinkedList<T> implements List<T> {
     }
 
     public T remove(int idx) {
+        // throw exception if not in range
+        if (idx < 0 || idx >= this.size()) {
+            throw new IndexOutOfBoundsException("Index invalid");
+        }
         T removed = null;
         if (idx == 0) {
             removed = root.data;
