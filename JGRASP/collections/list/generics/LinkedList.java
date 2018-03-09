@@ -19,9 +19,9 @@ public class LinkedList<T> implements List<T> {
 
     /* Contructor from array */
     public LinkedList(int[] A) {
-        for (int i = 0; i <= A.length - 1; i++) {
-//              this.add(A[i]);
-        }
+//         for (int i = 0; i <= A.length - 1; i++) {
+//             this.add(A[i]);
+//         }
     }
     
     public void add(T v) {
@@ -137,8 +137,19 @@ public class LinkedList<T> implements List<T> {
     }
 
     public T remove(int idx) {
-        T t = null;
-        return t; 
+        T removed = null;
+        if (idx == 0) {
+            removed = root.data;
+            root = root.next;
+            return removed;
+        }
+        Node r = root;
+        for (int i = 0; i <= idx; i++) {
+            r = r.next;
+        }
+        removed = (T) r.next.data;
+        r.next = r.next.next;
+        return removed;
     }
 
     public void insert(int idx, T val) throws IndexOutOfBoundsException {
