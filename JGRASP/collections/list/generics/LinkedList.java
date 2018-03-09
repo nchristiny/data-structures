@@ -85,30 +85,31 @@ public class LinkedList<T> implements List<T> {
     }
 
     public void sort() {
-   //      if (this.isEmpty() || this.size() == 1) {
-//             // if LinkedList is (empty OR contains one element)
-//             System.out.println("Already sorted");
-//         } else {
-//             // bubble sort: this implementation is very inefficient, but it works
-//             boolean swapped = true;
-//             // Continue until there are no swaps performed
-//             while (swapped) {
-//                 swapped = false;
-//                 Node r = root;
-//                 Node r2 = r.next;
-//                 int tmp;
-//                 while (r.next != null) {
-//                     if (true) { // r.data > r2.data
-//                         tmp = r.data;
-//                         r.data = r2.data;
-//                         r2.data = tmp;
-//                         swapped = true;
-//                     }
-//                     r = r.next;
-//                     r2 = r.next;
-//                 }
-//             }
-//         }
+// TODO implement sort for generic objects 
+//          if (this.isEmpty() || this.size() == 1) {
+//              // if LinkedList is (empty OR contains one element)
+//              System.out.println("Already sorted");
+//          } else {
+//              // bubble sort: this implementation is very inefficient, but it works
+//              boolean swapped = true;
+//              // Continue until there are no swaps performed
+//              while (swapped) {
+//                  swapped = false;
+//                  Node r = root;
+//                  Node r2 = r.next;
+//                  T tmp;
+//                  while (r.next != null) {
+//                      if (r.data.compareTo(r2.data) > 0) {  
+//                          tmp = (T) r.data;
+//                          r.data = r2.data;
+//                          r2.data = tmp;
+//                          swapped = true;
+//                      }
+//                      r = r.next;
+//                      r2 = r.next;
+//                  }
+//              }
+//          }
     }
 
     public void set(int idx, T val) throws IndexOutOfBoundsException {
