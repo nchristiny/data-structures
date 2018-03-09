@@ -48,7 +48,9 @@ public class Node<T> {
        System.out.println(genericLinkedList2); 
        genericLinkedList2.set(1, 1300);
        System.out.println(genericLinkedList2); 
-       genericLinkedList2.insert(1, 42); 
+       genericLinkedList2.insert(1, 60); 
+       System.out.println(genericLinkedList2); 
+       genericLinkedList2.sort(); // TODO implement generic sort
        System.out.println(genericLinkedList2); 
 
    }
