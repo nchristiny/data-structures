@@ -113,16 +113,16 @@ public class LinkedList<T> implements List<T> {
 
     public void set(int idx, T val) throws IndexOutOfBoundsException {
         // throw exception if not in range
-//         if (idx < 0 || idx > this.size()) {
-//             throw new IndexOutOfBoundsException("Index invalid");
-//         }
-//         Node r = root;
-//         if (!this.isEmpty()) { // if LinkedList is not empty
-//             for (int i = 0; i < idx; i++) {
-//                 r = r.next;
-//             }
-//         }
-//         r.data = val;
+         if (idx < 0 || idx > this.size()) {
+             throw new IndexOutOfBoundsException("Index invalid");
+         }
+         Node r = root;
+         if (!this.isEmpty()) { // if LinkedList is not empty
+             for (int i = 0; i < idx; i++) {
+                 r = r.next;
+             }
+         }
+         r.data = val;
     }
 
     public T get(int idx) throws IndexOutOfBoundsException {
