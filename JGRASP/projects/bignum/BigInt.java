@@ -13,6 +13,8 @@ public class BigInt implements Comparable<BigInt> {
    //eg "12341293487192857623948756293487562938457236046981406"
    public BigInt(String num) {
       /* set data from num */
+      
+      // determine postive or negative value
       String newNum = "";
       if (num.charAt(0) == '-') {
          this.isNeg = true;
