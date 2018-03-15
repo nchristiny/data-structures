@@ -31,13 +31,22 @@ public class BigInt implements Comparable<BigInt> {
       for (int i = 0; i <= newNum.length() - 1; i++) {
          /* obtain the int value of each character in string
           and add it to data linked list */      
-         if (newNum.charAt(i) == '0' && newNum.length() > 0){
+          
+          // TODO Fix this mess! 
+         if (newNum.charAt(i) == '0' && newNum.length() >= 0){
             // Skip leading zeros unless it is only char '0'
+            if (i == newNum.length() - 1 && this.checkForZero()) {
+                this.data.clear();
+                this.data.add(0);
+                this.isNeg = false;
+            }
             continue; 
          } 
          int digit = Character.getNumericValue(newNum.charAt(i));
          data.add(digit);
-      }    
+      }
+ 
+
    }
    
    public BigInt(BigInt num) {
@@ -47,6 +56,21 @@ public class BigInt implements Comparable<BigInt> {
       this.isNeg = num.isNeg;
    }
    
+   public boolean checkForZero() {
+       /* Helper to reduce all-zero data LinkedList to single 0 */
+       boolean allZero = true;
+       if (!(this.data.isEmpty())) {
+           for (int i = 0; i <= this.data.size() - 1; i++) {
+               if (this.data.get(i) != 0) {  
+                   return allZero = false;
+               } 
+           }
+       }
+       return allZero;  
+   }       
+   
+
+          
    public BigInt abs(BigInt a) {
       BigInt b = new BigInt(a);
       b.isNeg = false;
@@ -55,6 +79,7 @@ public class BigInt implements Comparable<BigInt> {
    
    /* return 0 if equal, -1 if 'this' is lesser, 1 if 'this' greater */
    // changing specification of this method slightly to better suit needs
+   @Override
    public int compareTo(BigInt b) {
       if (this.isNeg && !(b.isNeg)) {
           return -1;
@@ -81,7 +106,7 @@ public class BigInt implements Comparable<BigInt> {
       return 0; 
    }
    
-   // TODO implementing add, subtract, and multiplication, division, abs, compareTo
+   // TODO implementing subtract, and multiplication, division
    public BigInt add(BigInt n) {
       //'this' + n
       int carry = 0;
@@ -132,7 +157,7 @@ public class BigInt implements Comparable<BigInt> {
           } 
           resultingBigInt.data.add(result);
       }
-      // Flip data LinkedList using private BigInt method
+      // Flip data LinkedList using BigInt method
       resultingBigInt.reverseBigInt();
       return resultingBigInt;
    }
@@ -159,7 +184,7 @@ public class BigInt implements Comparable<BigInt> {
               b = n;
               a = this;
           } 
-          a.insertLeadingZeroes(b); // will add zeros to avoid null exceptions  
+          a.insertLeadingZeroes(b);
           for (int i = this.data.size() - 1; i >= 0; i--) {
                // actually perform a - b
                result = 0;
@@ -184,31 +209,34 @@ public class BigInt implements Comparable<BigInt> {
           resultingBigInt.reverseBigInt();
       } else {
           // the signs are different
-          // TODO this produces weird values and needs debugging
           resultingBigInt = abs(n).add(abs(this));
           resultingBigInt.isNeg = this.isNeg;
       }
-      return resultingBigInt;
+      BigInt x = new BigInt(resultingBigInt);
+      return x;
    }
    
-   private void insertLeadingZeroes(BigInt n) {      
+   public void insertLeadingZeroes(BigInt n) {      
       // Helper method inserts zeros in front of shorter length to match LinkedList sizes
+      if (this.data.size() == n.data.size()) {
+          return;
+      }
       if (this.data.size() > n.data.size()) {
-         // insert leading zeroes into n
-         int leadingZeroes = this.data.size() - n.data.size();
-         for (int i = 0; i <= leadingZeroes; i++) {
-             n.data.insert(0,0);
-         }
+          // insert leading zeroes into n
+          int leadingZeroes = this.data.size() - n.data.size();
+          for (int i = 0; i <= leadingZeroes; i++) {
+              n.data.insert(0,0);
+          }
       } else if (this.data.size() < n.data.size()) {
-         // insert leading zeroes into 'this'
-         int leadingZeroes = n.data.size() - this.data.size();
-         for (int i = 0; i <= leadingZeroes; i++) {
-             this.data.insert(0,0);
-         }
+          // insert leading zeroes into 'this'
+          int leadingZeroes = n.data.size() - this.data.size();
+          for (int i = 0; i <= leadingZeroes; i++) {
+              this.data.insert(0,0);
+          }
       }  
    } 
    
-   private void reverseBigInt() { 
+   public void reverseBigInt() { 
        // Helper method reverses the Linked List data
        for (int i = 0; i < this.data.size()/2; i++) {
            // wish to switch elements only if necessary
@@ -259,13 +287,20 @@ public class BigInt implements Comparable<BigInt> {
        }
    }
    
+   @Override
    public String toString() {
       String r = "";
       if (this.isNeg == true) {
-         r = "-";
+          r = "-";
+      }
+      if (this.checkForZero()) {
+          return r = "0";
       }
       for (int i = 0; i <= data.size() - 1; i++){
-         r += data.get(i);
+
+             r += data.get(i);
+      
+
       }
       return r;
    }   
@@ -276,30 +311,32 @@ public class BigInt implements Comparable<BigInt> {
       BigInt myNum3 = new BigInt("+0000001243523452345234522345");
       BigInt myNum01 = new BigInt("123");
       BigInt myNum02 = new BigInt("-0012341293487192857623948756293487562938457236046981406");
-      System.out.println(myNum);
-      System.out.println(myNum2);
-      System.out.println(myNum3);
-      System.out.println(myNum.toFormattedString());
-      System.out.println(myNum2.toFormattedString());
-      System.out.println(myNum3.toFormattedString());
-      System.out.println(myNum01.toFormattedString());
-      System.out.println(myNum02.toFormattedString());
+//       System.out.println(myNum);
+//       System.out.println(myNum2);
+//       System.out.println(myNum3);
+//       System.out.println(myNum.toFormattedString());
+//       System.out.println(myNum2.toFormattedString());
+//       System.out.println(myNum3.toFormattedString());
+//       System.out.println(myNum01.toFormattedString());
+//       System.out.println(myNum02.toFormattedString());
+//       
+//       BigInt duplicatedBigInt = new BigInt(myNum02);
+//       System.out.println(duplicatedBigInt.toFormattedString());
+// 
+//       System.out.println(myNum.add(myNum).toFormattedString());
+//       System.out.println(myNum.add(myNum2));
+//       
+//       System.out.println(myNum.compareTo(myNum01));
+//       System.out.println(myNum01.compareTo(myNum));
+//       System.out.println(myNum.compareTo(myNum2));
+//       System.out.println(myNum.compareTo(myNum));
+//       
+//       System.out.println("Subtracting: ");
+//       System.out.println(myNum.subtract(myNum));
+//       System.out.println(myNum.subtract(myNum01));
       
-      BigInt duplicatedBigInt = new BigInt(myNum02);
-      System.out.println(duplicatedBigInt.toFormattedString());
-
-      System.out.println(myNum.add(myNum).toFormattedString());
-      System.out.println(myNum.add(myNum2));
+      BigInt myNum00 = new BigInt("10000");
+      System.out.println(myNum00);
       
-      System.out.println(myNum.compareTo(myNum01));
-      System.out.println(myNum01.compareTo(myNum));
-      System.out.println(myNum.compareTo(myNum2));
-      System.out.println(myNum.compareTo(myNum));
-      
-      System.out.println("Subtracting: ");
-      System.out.println(myNum.subtract(myNum));
-      System.out.println(myNum.subtract(myNum01));
-
-
    }
 }
