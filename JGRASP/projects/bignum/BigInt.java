@@ -8,6 +8,8 @@ public class BigInt implements Comparable<BigInt> {
    
    public BigInt() {
       /* set data and isNeg flag */
+      this.data.add(0);
+      this.isNeg = false;
    }      
 
    //eg "12341293487192857623948756293487562938457236046981406"
@@ -59,8 +61,50 @@ public class BigInt implements Comparable<BigInt> {
    
    // TODO implementing add, subtract, and multiplication, division, abs, compareTo
    public BigInt add(BigInt n) {
+      
       //'this' + n
-      return null;
+      //check signs
+      // check if same length, if not insert zeros in front of shorter value to match
+      // loop through each BigInt's data from tail
+      // add each column and save amount to carry to next operation if greater than 9
+      int carry = 0;
+      int result = 0;
+      BigInt resultingBigInt = new BigInt("0");
+
+      if (this.data.size() > n.data.size()) {
+         // insert leading zeroes into n
+         int leadingZeroes = this.data.size() - n.data.size();
+         for (int i = 0; i <= leadingZeroes; i++) {
+             n.data.insert(0,0);
+         }
+      } else if (this.data.size() < n.data.size()) {
+         // insert leading zeroes into this
+         int leadingZeroes = n.data.size() - this.data.size();
+         for (int i = 0; i <= leadingZeroes; i++) {
+             this.data.insert(0,0);
+         }
+      }
+      
+      for (int i = this.data.size() - 1; i >= 0; i--) {
+          result = 0;
+          if (carry != 0) {
+              result = carry;
+              carry = 0;
+          }
+          result += this.data.get(i) + n.data.get(i);
+          if (result > 9) {
+              carry = result % 9;
+              if (result == 10) {
+                  result = 0;
+              } else { 
+                  result = result - carry; 
+              }           
+          } 
+          resultingBigInt.data.add(result);
+      }
+      // Flip data LinkedList using private BigInt method
+      resultingBigInt.reverseBigInt();
+      return resultingBigInt;
    }
    
    public BigInt subtract(BigInt n) {
@@ -69,6 +113,26 @@ public class BigInt implements Comparable<BigInt> {
       return null;
 
    }   
+   
+   private void reverseBigInt()
+   { 
+     for (int i = 0; i < this.data.size()/2; i++)
+     {
+        // wish to switch elements only if necessary
+        if (data.get(i) != data.get(this.data.size() - i - 1)) 
+        {
+            int temp = data.get(i);
+            data.set(i, data.get(this.data.size() - i - 1));
+            data.set(this.data.size() - i - 1, temp);        
+        } 
+        else 
+        {
+            continue;
+        }
+
+     }
+      
+   }
    
    public String toFormattedString() {
        /* start at end of r, work backwards and
@@ -134,6 +198,8 @@ public class BigInt implements Comparable<BigInt> {
       
       BigInt duplicatedBigInt = new BigInt(myNum02);
       System.out.println(duplicatedBigInt.toFormattedString());
+
+      System.out.println(myNum.add(myNum).toFormattedString());
 
    }
 }
