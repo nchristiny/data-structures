@@ -53,7 +53,7 @@ public class BigInt implements Comparable<BigInt> {
       return b;
    }
    
-   /* return 0 if equal, -1 if 'this; is lesser, 1 if 'this' greater */
+   /* return 0 if equal, -1 if 'this' is lesser, 1 if 'this' greater */
    // changing specification of this method slightly to better suit needs
    public int compareTo(BigInt b) {
       if (this.isNeg && !(b.isNeg)) {
@@ -111,21 +111,8 @@ public class BigInt implements Comparable<BigInt> {
       }
       // else both signs are postive, keep adding as normal
       
-      // check if same length, if not insert zeros in front of shorter value to match
-      if (this.data.size() > n.data.size()) {
-         // insert leading zeroes into n
-         int leadingZeroes = this.data.size() - n.data.size();
-         for (int i = 0; i <= leadingZeroes; i++) {
-             n.data.insert(0,0);
-         }
-      } else if (this.data.size() < n.data.size()) {
-         // insert leading zeroes into 'this'
-         int leadingZeroes = n.data.size() - this.data.size();
-         for (int i = 0; i <= leadingZeroes; i++) {
-             this.data.insert(0,0);
-         }
-      }
-      
+      this.insertLeadingZeroes(n);
+
       // loop through each BigInt's data from tail
       for (int i = this.data.size() - 1; i >= 0; i--) {
           // add each column and carry amount to next operation if greater than 9
@@ -159,15 +146,41 @@ public class BigInt implements Comparable<BigInt> {
       
       if (this.isNeg == n.isNeg) {
           // signs are the same
-//           if () {
-              // n is greater than than 'this'
-              
+          if (this.compareTo(n) == 1) {
+              // 'this' is greater than than n
+              flip = true;
+              b = this;
+              a = n;
+          } else {
+            flip = false;
+            b = n;
+            a = this;
+          } 
+             
       }
       return null;
 
-   }   
+   }
+   
+   private void insertLeadingZeroes(BigInt n) {      
+      // Helper method inserts zeros in front of shorter length to match LinkedList sizes
+      if (this.data.size() > n.data.size()) {
+         // insert leading zeroes into n
+         int leadingZeroes = this.data.size() - n.data.size();
+         for (int i = 0; i <= leadingZeroes; i++) {
+             n.data.insert(0,0);
+         }
+      } else if (this.data.size() < n.data.size()) {
+         // insert leading zeroes into 'this'
+         int leadingZeroes = n.data.size() - this.data.size();
+         for (int i = 0; i <= leadingZeroes; i++) {
+             this.data.insert(0,0);
+         }
+      }  
+   } 
    
    private void reverseBigInt() { 
+       // Helper method reverses the Linked List data
        for (int i = 0; i < this.data.size()/2; i++) {
            // wish to switch elements only if necessary
            if (data.get(i) != data.get(this.data.size() - i - 1)) {
