@@ -143,23 +143,52 @@ public class BigInt implements Comparable<BigInt> {
       boolean flip = false;
       BigInt a = new BigInt();
       BigInt b = new BigInt();
-      
+      int result = 0;
+      int carry = 0;
+      BigInt resultingBigInt = new BigInt();
+
       if (this.isNeg == n.isNeg) {
-          // signs are the same
+          // the signs are the same
           if (this.compareTo(n) == 1) {
-              // 'this' is greater than than n
+              // 'this' is greater than n
               flip = true;
               b = this;
               a = n;
           } else {
-            flip = false;
-            b = n;
-            a = this;
+              flip = false;
+              b = n;
+              a = this;
           } 
-             
+          a.insertLeadingZeroes(b); // will add zeros to avoid null exceptions  
+          for (int i = this.data.size() - 1; i >= 0; i--) {
+               // actually perform a - b
+               result = 0;
+               if (carry != 0) {
+                   int newVal = a.data.get(i) - 1;  
+                   a.data.set(i, newVal);
+                   carry = 0;
+               }
+               result = a.data.get(i) - b.data.get(i);
+               if (result >= 0) {
+                   resultingBigInt.data.add(result);
+               } else {
+                   resultingBigInt.data.add(result + 10);
+                   carry = 1;
+               }
+              
+          }
+          resultingBigInt.isNeg = a.isNeg;
+          if (flip = true) {
+              resultingBigInt.isNeg = !resultingBigInt.isNeg;
+          }
+          resultingBigInt.reverseBigInt();
+      } else {
+          // the signs are different
+          // TODO this produces weird values and needs debugging
+          resultingBigInt = abs(n).add(abs(this));
+          resultingBigInt.isNeg = this.isNeg;
       }
-      return null;
-
+      return resultingBigInt;
    }
    
    private void insertLeadingZeroes(BigInt n) {      
@@ -245,7 +274,7 @@ public class BigInt implements Comparable<BigInt> {
       BigInt myNum = new BigInt("12345");
       BigInt myNum2 = new BigInt("-12345");
       BigInt myNum3 = new BigInt("+0000001243523452345234522345");
-      BigInt myNum01 = new BigInt("-123");
+      BigInt myNum01 = new BigInt("123");
       BigInt myNum02 = new BigInt("-0012341293487192857623948756293487562938457236046981406");
       System.out.println(myNum);
       System.out.println(myNum2);
@@ -266,6 +295,11 @@ public class BigInt implements Comparable<BigInt> {
       System.out.println(myNum01.compareTo(myNum));
       System.out.println(myNum.compareTo(myNum2));
       System.out.println(myNum.compareTo(myNum));
+      
+      System.out.println("Subtracting: ");
+      System.out.println(myNum.subtract(myNum));
+      System.out.println(myNum.subtract(myNum01));
+
 
    }
 }
