@@ -8,7 +8,6 @@ public class BigInt implements Comparable<BigInt> {
    
    public BigInt() {
       /* set data and isNeg flag */
-      this.data.add(0);
       this.isNeg = false;
    }      
 
@@ -32,8 +31,8 @@ public class BigInt implements Comparable<BigInt> {
       for (int i = 0; i <= newNum.length() - 1; i++) {
          /* obtain the int value of each character in string
           and add it to data linked list */      
-         if (newNum.charAt(i) == '0'){
-            // Skip leading zeros
+         if (newNum.charAt(i) == '0' && newNum.length() > 0){
+            // Skip leading zeros unless it is only char '0'
             continue; 
          } 
          int digit = Character.getNumericValue(newNum.charAt(i));
@@ -54,23 +53,65 @@ public class BigInt implements Comparable<BigInt> {
       return b;
    }
    
-   /* return 0 if equal, - value if lesser, + value if greater */
+   /* return 0 if equal, -1 if 'this; is lesser, 1 if 'this' greater */
+   // changing specification of this method slightly to better suit needs
    public int compareTo(BigInt b) {
-      return 0;
+      if (this.isNeg && !(b.isNeg)) {
+          return -1;
+      } else if (!(this.isNeg) && b.isNeg) {
+          return 1;
+      }
+      
+      if (b.data.size() > this.data.size()){
+          return -1;
+      } else if (b.data.size() < this.data.size()){
+          return 1;
+      } else {
+          // else each BigInt has equal length data LinkedLists
+          // Starting from left to right, compare the pair of nodes 
+          // return as soon as one is found to be greater
+          for (int i = 0; i <= this.data.size() - 1; i++) {
+              if (b.data.get(i) > this.data.get(i)) {
+                  return -1;    
+              } else if (b.data.get(i) < this.data.get(i)){
+                  return 1;
+              }
+          }
+      }
+      return 0; 
    }
    
    // TODO implementing add, subtract, and multiplication, division, abs, compareTo
    public BigInt add(BigInt n) {
-      
       //'this' + n
-      //check signs
-      // check if same length, if not insert zeros in front of shorter value to match
-      // loop through each BigInt's data from tail
-      // add each column and save amount to carry to next operation if greater than 9
       int carry = 0;
       int result = 0;
-      BigInt resultingBigInt = new BigInt("0");
-
+      BigInt resultingBigInt = new BigInt();
+      
+      //check signs
+      // if both are negative, we call subtract method
+      if (this.isNeg && n.isNeg) {
+         // BigInt temp = new BigInt(n);
+         // temp.isNeg = false;
+         // resultingBigInt = this.subtract(temp);
+         // return resultingBigInt;
+      } else if (this.isNeg ^ n.isNeg) {
+         // (exclusive-or) if operands have different signs
+         if (this.isNeg == true) {
+            // BigInt temp = new BigInt(this);
+            // temp.isNeg = false;
+            // resultingBigInt = n.subtract(temp);
+            // return resultingBigInt;
+         } else {
+            // BigInt temp = new BigInt(n);
+            // temp.isNeg = false;
+            // resultingBigInt = this.subtract(temp);
+            // return resultingBigInt;
+         }
+      }
+      // else both signs are postive, keep adding as normal
+      
+      // check if same length, if not insert zeros in front of shorter value to match
       if (this.data.size() > n.data.size()) {
          // insert leading zeroes into n
          int leadingZeroes = this.data.size() - n.data.size();
@@ -78,14 +119,16 @@ public class BigInt implements Comparable<BigInt> {
              n.data.insert(0,0);
          }
       } else if (this.data.size() < n.data.size()) {
-         // insert leading zeroes into this
+         // insert leading zeroes into 'this'
          int leadingZeroes = n.data.size() - this.data.size();
          for (int i = 0; i <= leadingZeroes; i++) {
              this.data.insert(0,0);
          }
       }
       
+      // loop through each BigInt's data from tail
       for (int i = this.data.size() - 1; i >= 0; i--) {
+          // add each column and carry amount to next operation if greater than 9
           result = 0;
           if (carry != 0) {
               result = carry;
@@ -108,30 +151,34 @@ public class BigInt implements Comparable<BigInt> {
    }
    
    public BigInt subtract(BigInt n) {
-      /* Subtract n from this, ('this'-n). flip if n greater than this and negate
+      /* Subtract n from 'this', ('this'-n). flip if n greater than this and negate
          Implementing abs to called here */
+      boolean flip = false;
+      BigInt a = new BigInt();
+      BigInt b = new BigInt();
+      
+      if (this.isNeg == n.isNeg) {
+          // signs are the same
+//           if () {
+              // n is greater than than 'this'
+              
+      }
       return null;
 
    }   
    
-   private void reverseBigInt()
-   { 
-     for (int i = 0; i < this.data.size()/2; i++)
-     {
-        // wish to switch elements only if necessary
-        if (data.get(i) != data.get(this.data.size() - i - 1)) 
-        {
-            int temp = data.get(i);
-            data.set(i, data.get(this.data.size() - i - 1));
-            data.set(this.data.size() - i - 1, temp);        
-        } 
-        else 
-        {
-            continue;
-        }
-
-     }
-      
+   private void reverseBigInt() { 
+       for (int i = 0; i < this.data.size()/2; i++) {
+           // wish to switch elements only if necessary
+           if (data.get(i) != data.get(this.data.size() - i - 1)) {
+               int temp = data.get(i);
+               data.set(i, data.get(this.data.size() - i - 1));
+               data.set(this.data.size() - i - 1, temp);        
+           } 
+           else {
+               continue;
+           }
+       }
    }
    
    public String toFormattedString() {
@@ -200,6 +247,12 @@ public class BigInt implements Comparable<BigInt> {
       System.out.println(duplicatedBigInt.toFormattedString());
 
       System.out.println(myNum.add(myNum).toFormattedString());
+      System.out.println(myNum.add(myNum2));
+      
+      System.out.println(myNum.compareTo(myNum01));
+      System.out.println(myNum01.compareTo(myNum));
+      System.out.println(myNum.compareTo(myNum2));
+      System.out.println(myNum.compareTo(myNum));
 
    }
 }
