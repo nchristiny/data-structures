@@ -32,10 +32,10 @@ public class BigInt implements Comparable<BigInt> {
          /* obtain the int value of each character in string
           and add it to data linked list */      
           
-          // TODO Fix this mess! 
-         if (newNum.charAt(i) == '0' && newNum.length() >= 0){
+         
+         if (newNum.charAt(newNum.length() - 1) == '0' && i >= 0){
             // Skip leading zeros unless it is only char '0'
-            if (i == newNum.length() - 1 && this.checkForZero()) {
+            if (i == newNum.length() - 1) {
                 this.data.clear();
                 this.data.add(0);
                 this.isNeg = false;
@@ -45,7 +45,7 @@ public class BigInt implements Comparable<BigInt> {
          int digit = Character.getNumericValue(newNum.charAt(i));
          data.add(digit);
       }
- 
+      setToZero();
 
    }
    
@@ -56,7 +56,7 @@ public class BigInt implements Comparable<BigInt> {
       this.isNeg = num.isNeg;
    }
    
-   public boolean checkForZero() {
+   public boolean setToZero() {
        /* Helper to reduce all-zero data LinkedList to single 0 */
        boolean allZero = true;
        if (!(this.data.isEmpty())) {
@@ -65,6 +65,9 @@ public class BigInt implements Comparable<BigInt> {
                    return allZero = false;
                } 
            }
+           this.data.clear();
+           this.data.add(0);
+           this.isNeg = false;
        }
        return allZero;  
    }       
@@ -293,7 +296,7 @@ public class BigInt implements Comparable<BigInt> {
       if (this.isNeg == true) {
           r = "-";
       }
-      if (this.checkForZero()) {
+      if (this.setToZero()) {
           return r = "0";
       }
       for (int i = 0; i <= data.size() - 1; i++){

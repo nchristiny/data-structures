@@ -18,9 +18,9 @@ public class LinkedList implements List {
     }
 
     /* Contructor from array */
-    public LinkedList(int[] A) {
-        for (int i = 0; i <= A.length - 1; i++) {
-             this.add(A[i]);
+    public LinkedList(int[] inputArray) {
+        for (int i = 0; i <= inputArray.length - 1; i++) {
+             this.add(inputArray[i]);
         }
     }
 
@@ -46,21 +46,22 @@ public class LinkedList implements List {
         return false;
     }
 
-    public int indexOf(int v) {
-        // Not implemented
-        return -1;
+    public int indexOf(int val) {
+       Node r = root;
+       int i =0;
+       while (r != null) {
+           // while LinkedList is not empty
+           if (val == r.data) {
+               return i;
+           }
+           r = r.next;
+           i++;
+       }
+       return -1;
     }
 
     public boolean contains(int v) {
-        Node r = root;
-        while (r != null) {
-            // while LinkedList is not empty
-            if (v == r.data) {
-                return true;
-            }
-            r = r.next;
-        }
-        return false;
+    	  return (indexOf(v) != -1);
     }
 
     public void clear() {
@@ -82,33 +83,6 @@ public class LinkedList implements List {
             return 0;
         }
         return count;
-    }
-
-    public void sort() {
-        if (this.isEmpty() || this.size() == 1) {
-            // if LinkedList is (empty OR contains one element)
-            System.out.println("Already sorted");
-        } else {
-            // bubble sort: this implementation is very inefficient, but it works
-            boolean swapped = true;
-            // Continue until there are no swaps performed
-            while (swapped) {
-                swapped = false;
-                Node r = root;
-                Node r2 = r.next;
-                int tmp;
-                while (r.next != null) {
-                    if (r.data > r2.data) {
-                        tmp = r.data;
-                        r.data = r2.data;
-                        r2.data = tmp;
-                        swapped = true;
-                    }
-                    r = r.next;
-                    r2 = r.next;
-                }
-            }
-        }
     }
 
     public void set(int idx, int val) throws IndexOutOfBoundsException {
@@ -177,6 +151,46 @@ public class LinkedList implements List {
             t.next = r.next;
             r.next = t;
         }
+    }
+    
+    public void sort() {
+        if (this.isEmpty() || this.size() == 1) {
+            // if LinkedList is (empty OR contains one element)
+            System.out.println("Too small to be sorted");
+        } else {
+            // bubble sort: this implementation is very inefficient, but it works
+            boolean swapped = true;
+            // Continue until there are no swaps performed
+            while (swapped) {
+                swapped = false;
+                Node r = root;
+                Node r2 = r.next;
+                int tmp;
+                while (r.next != null) {
+                    if (r.data > r2.data) {
+                        tmp = r.data;
+                        r.data = r2.data;
+                        r2.data = tmp;
+                        swapped = true;
+                    }
+                    r = r.next;
+                    r2 = r.next;
+                }
+            }
+        }
+    }   
+     
+    public void reverse() {
+		  for (int i = 0; i < this.size()/2; i++) {
+		  // wish to switch elements only if necessary
+			  if (this.get(i) != this.get(this.size() - i - 1)) {
+				  int temp = this.get(i);
+				  this.set(i, this.get(this.size() - i - 1));
+				  this.set(this.size() - i - 1, temp);
+			  } else {
+				  continue;
+			  }
+		  }         
     }
 
     public String toString() {

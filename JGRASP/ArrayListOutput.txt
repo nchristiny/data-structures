@@ -1,0 +1,54 @@
+Adding: 
+1 69 91 68 90 39 53 10 98 2 84 70 86 71 
+myList Size is 14
+1, 69, 91, 68, 90, 39, 53, 10, 98, 2, 84, 70, 86, 71
+
+69 is at index: 1.  removing...
+71 is at index: 12.  removing...
+70 is at index: 10.  removing...
+
+Resulting list after removing: 
+1, 91, 68, 90, 39, 53, 10, 98, 2, 84, 86
+myList size is 11
+
+Changing the 68 at index 2 to 85.
+Changing the 39 at index 4 to 88.
+Changing the 10 at index 6 to 14.
+Changing the 91 at index 1 to 7.
+Changing the 14 at index 6 to 69.
+Resulting list after changing: 
+1, 7, 85, 90, 88, 53, 69, 98, 2, 84, 86
+
+1 is in the list!
+5 is not in the list!
+89 is not in the list!
+82 is not in the list!
+52 is not in the list!
+5 is not in the list!
+74 is not in the list!
+35 is not in the list!
+68 is not in the list!
+36 is not in the list!
+69 is in the list!
+32 is not in the list!
+95 is not in the list!
+6 is not in the list!
+31 is not in the list!
+39 is not in the list!
+46 is not in the list!
+35 is not in the list!
+80 is not in the list!
+42 is not in the list!
+40 is not in the list!
+77 is not in the list!
+
+Sorting the list:
+1, 2, 7, 53, 69, 84, 85, 86, 88, 90, 98
+
+Reversing the list.
+98, 90, 88, 86, 85, 84, 69, 53, 7, 2, 1
+
+Removing all the elements from myList!
+Size of myList after emptying = 0
+myList: 
+Goodbye!

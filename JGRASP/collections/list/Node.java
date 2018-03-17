@@ -5,20 +5,20 @@ package collections.list;
 
 public class Node {
 
-    int data;
-    Node next;
-    
-    public Node() {
-        next = null;
-    }
-    
-    public Node(int v) {
-        data = v;
-        next = null;
-    }
+	int data;
+	Node next;
 
-    @Override
-    public String toString() {
-        return "" + data;
-    }
+	public Node() {
+		next = null;
+	}
+
+	public Node(int v) {
+		data = v;
+		next = null;
+	}
+
+	@Override
+	public String toString() {
+		return "" + data;
+	}
 }

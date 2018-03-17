@@ -3,8 +3,6 @@
  */
 package collections.list;
 
-import java.io.*;
-
 public class LinkedListTester {
 
     public static void main(String[] args) throws RuntimeException {
@@ -74,6 +72,10 @@ public class LinkedListTester {
             System.out.println("Size = " + myList.size());
             System.out.println(myList);
             
+            System.out.println("Reversing: ");
+            myList.reverse();
+            System.out.println(myList);
+
             // Implement Array constructor for LinkedList
             int myArray[] = {54,32,43,54,34,32};
             List myList2 = new LinkedList(myArray); 
