@@ -61,7 +61,7 @@ public class LinkedList implements List {
     }
 
     public boolean contains(int v) {
-    	  return (indexOf(v) != -1);
+          return (indexOf(v) != -1);
     }
 
     public void clear() {
@@ -152,7 +152,7 @@ public class LinkedList implements List {
             r.next = t;
         }
     }
-    
+
     public void sort() {
         if (this.isEmpty() || this.size() == 1) {
             // if LinkedList is (empty OR contains one element)
@@ -178,19 +178,19 @@ public class LinkedList implements List {
                 }
             }
         }
-    }   
-     
+    }
+
     public void reverse() {
-		  for (int i = 0; i < this.size()/2; i++) {
-		  // wish to switch elements only if necessary
-			  if (this.get(i) != this.get(this.size() - i - 1)) {
-				  int temp = this.get(i);
-				  this.set(i, this.get(this.size() - i - 1));
-				  this.set(this.size() - i - 1, temp);
-			  } else {
-				  continue;
-			  }
-		  }         
+          for (int i = 0; i < this.size()/2; i++) {
+          // wish to switch elements only if necessary
+              if (this.get(i) != this.get(this.size() - i - 1)) {
+                  int temp = this.get(i);
+                  this.set(i, this.get(this.size() - i - 1));
+                  this.set(this.size() - i - 1, temp);
+              } else {
+                  continue;
+              }
+          }
     }
 
     public String toString() {

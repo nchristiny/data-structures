@@ -9,7 +9,7 @@ public class LinkedListTester {
         try {
             int maxVal = 100;
             List myList = new LinkedList();
-            // myList.remove(-1); 
+            // myList.remove(-1);
             // Invokes java.lang.IndexOutOfBoundsException: Index invalid
             int numVals = (int) (Math.random() * 16) + 8;
             System.out.println("Size = " + myList.size());
@@ -71,14 +71,14 @@ public class LinkedListTester {
             }
             System.out.println("Size = " + myList.size());
             System.out.println(myList);
-            
+
             System.out.println("Reversing: ");
             myList.reverse();
             System.out.println(myList);
 
             // Implement Array constructor for LinkedList
             int myArray[] = {54,32,43,54,34,32};
-            List myList2 = new LinkedList(myArray); 
+            List myList2 = new LinkedList(myArray);
             System.out.println("Creating a new LinkedList from an array of 6 elements.");
             System.out.println("Size = " + myList2.size());
             System.out.println(myList2);
