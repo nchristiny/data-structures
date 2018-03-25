@@ -99,6 +99,8 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
             for (int i = 0; i < idx; i++) {
                 r = r.next;
             }
+        } else {
+            return null;
         }
         return r.data;
     }

@@ -8,15 +8,13 @@ public class BigInt implements Comparable<BigInt> {
 
     public BigInt() {
         /* set data and isNeg flag */
-        this.data.add(0);
         this.isNeg = false;
+        this.checkOrSetToZero();
     }
 
    //eg "12341293487192857623948756293487562938457236046981406"
     public BigInt(String num) {
         /* set data from num */
-
-        // determine postive or negative value
         String newNum = "";
         if (num.charAt(0) == '-') {
             this.isNeg = true;
@@ -28,19 +26,18 @@ public class BigInt implements Comparable<BigInt> {
             this.isNeg = false;
             newNum = num;
         }
-
+            
         for (int i = 0; i <= newNum.length() - 1; i++) {
         /* obtain the int value of each character in string
          and add it to data linked list */
-        if(data.isEmpty() && newNum.charAt(i) == '0') {
-            if (i == newNum.length() - 1) {
-                setToZero();
+            // if '0' and data is yet empty, then continue
+            if (newNum.charAt(i) == '0' && data.isEmpty()) {    
+                continue;
             }
-            continue;
+            int digit = Character.getNumericValue(newNum.charAt(i));
+            data.add(digit);
         }
-        int digit = Character.getNumericValue(newNum.charAt(i));
-        data.add(digit);
-        }
+        this.checkOrSetToZero();
     }
 
     public BigInt(BigInt num) {
@@ -48,53 +45,14 @@ public class BigInt implements Comparable<BigInt> {
         data reference should be new */
         this.data = num.data;
         this.isNeg = num.isNeg;
-    }
-
-    public boolean setToZero() {
-        /* Helper to reduce all-zero data LinkedList to postive single 0 */
-        boolean allZero = true;
-        if (!(this.data.isEmpty())) {
-            for (int i = 0; i <= this.data.size() - 1; i++) {
-                if (this.data.get(i) != 0) {
-                    return allZero = false;
-                }
-            }
-            this.data.clear();
-            this.data.add(0);
-            this.isNeg = false;
-        }
-        return allZero;
+        this.stripLeadingZeros();
+        this.checkOrSetToZero();
     }
 
     public BigInt abs(BigInt a) {
         BigInt b = new BigInt(a);
         b.isNeg = false;
         return b;
-    }
-
-    /* return 0 if equal, -1 if 'this' is lesser, +1 if 'this' greater */
-    @Override
-    public int compareTo(BigInt b) {
-        if (this.isNeg && !(b.isNeg)) {
-            return -1;
-        } else if (!(this.isNeg) && b.isNeg) {
-            return 1;
-        }
-
-        if (b.data.size() > this.data.size()){
-            return -1;
-        } else if (b.data.size() < this.data.size()){
-            return 1;
-        } else {
-            for (int i = 0; i <= this.data.size() - 1; i++) {
-                if (b.data.get(i) > this.data.get(i)) {
-                    return -1;
-                } else if (b.data.get(i) < this.data.get(i)){
-                    return 1;
-                }
-            }
-        }
-        return 0;
     }
 
    // TODO implementing subtract and addition for different signs
@@ -104,6 +62,8 @@ public class BigInt implements Comparable<BigInt> {
         int carry = 0;
         int result = 0;
         BigInt resultingBigInt = new BigInt();
+        BigInt a = new BigInt(this);
+        BigInt b = new BigInt(n);
 
           //check signs
           // if both are negative, we call subtract method
@@ -128,17 +88,17 @@ public class BigInt implements Comparable<BigInt> {
         }
         // else both signs are postive, keep adding as normal
 
-        this.insertLeadingZeroes(n);
+        a.insertLeadingZeros(b);
 
         // loop through each BigInt's data from tail
-        for (int i = this.data.size() - 1; i >= 0; i--) {
+        for (int i = a.data.size() - 1; i >= 0; i--) {
             // add each column and carry amount to next operation if greater than 9
             result = 0;
             if (carry != 0) {
                 result = carry;
                 carry = 0;
             }
-            result += this.data.get(i) + n.data.get(i);
+            result += a.data.get(i) + b.data.get(i);
             if (result > 9) {
                 carry = result % 9;
                 if (result == 10) {
@@ -150,6 +110,9 @@ public class BigInt implements Comparable<BigInt> {
             resultingBigInt.data.add(result);
         }
         resultingBigInt.data.reverse();
+        resultingBigInt.stripLeadingZeros();
+        resultingBigInt.checkOrSetToZero();
+
         return resultingBigInt;
     }
 
@@ -165,7 +128,7 @@ public class BigInt implements Comparable<BigInt> {
 
           if (this.isNeg == n.isNeg) {
               // the signs are the same
-            if (this.compareTo(n) == 1) {
+            if (abs(this).compareTo(abs(n)) == 1) {
                   // 'this' is greater than n
                 flip = true;
                 b = this;
@@ -175,8 +138,8 @@ public class BigInt implements Comparable<BigInt> {
                 b = n;
                 a = this;
             }
-            a.insertLeadingZeroes(b);
-            for (int i = this.data.size() - 1; i >= 0; i--) {
+            a.insertLeadingZeros(b);
+            for (int i = b.data.size() - 1; i >= 0; i--) {
                    // actually perform a - b
                 result = 0;
                 if (carry != 0) {
@@ -193,7 +156,7 @@ public class BigInt implements Comparable<BigInt> {
                 }
 
             }
-            resultingBigInt.isNeg = a.isNeg;
+            // resultingBigInt.isNeg = a.isNeg;
             if (flip = true) {
                 resultingBigInt.isNeg = !resultingBigInt.isNeg;
             }
@@ -203,12 +166,30 @@ public class BigInt implements Comparable<BigInt> {
             resultingBigInt = abs(n).add(abs(this));
             resultingBigInt.isNeg = this.isNeg;
         }
-        // BigInt x = new BigInt(resultingBigInt);
+        // strip leading zeros
+        resultingBigInt.stripLeadingZeros();
+        resultingBigInt.checkOrSetToZero();
         return resultingBigInt;
     }
-
-    public void insertLeadingZeroes(BigInt n) {
-          // Helper method inserts zeros in front of shorter length to match LinkedList sizes
+    
+    public boolean checkOrSetToZero() {
+        /* Checks if values are all zero, if so clears linked list */
+        boolean allZero = true;
+        if (!(this.data.isEmpty())) {
+            for (int i = 0; i <= this.data.size() - 1; i++) {
+                if (this.data.get(i) != 0) {
+                    return allZero = false;
+                }
+            }
+        }
+        this.data.clear();
+        // this.data.add(0);
+        this.isNeg = false;
+        return allZero;
+    }   
+    
+    public void insertLeadingZeros(BigInt n) {
+          /* Inserts zeros to shorter element to match larger */
         if (this.data.size() == n.data.size()) {
             return;
         }
@@ -226,14 +207,46 @@ public class BigInt implements Comparable<BigInt> {
             }
         }
     }
+    
+    public void stripLeadingZeros() {
+        /* removes leading zeros */ 
+        String newString = "";
+        newString += this.toString();
+        if ((newString.charAt(0) == '-') && (this.isNeg == true)) {
+            newString = this.toString().substring(1);
+            }
+        int i = 0;
+        while ((i < newString.length() - 1) && (newString.charAt(i) == '0')) {
+            i++;
+        }
+        newString = newString.substring(i);
+        
+        // Instead of creating a new BigInt (costly) we will modify existing
+        int len = 0;
+        if (this.isNeg == true) {
+            len = this.toString().length() - 1;
+        } else if (this.isNeg == false) {
+            len = this.toString().length();
+        }
+        
+        if (len != newString.length()) {
+        
+            int diff = len - newString.length();  
+            // remove all linked list nodes up to non zero index 
+            for (int j = 0; j < diff - 1; j++) {
+                this.data.remove(j);
+            }
+        }
+    
+    }
 
     public String toFormattedString() {
-           /* start at end of r, work backwards and
+        /* start at end of r, work backwards and
            insert commas every three characters */
-           String r = this.toString();
+        String r = this.toString();
 
-           // check to see if format is necessary
-           if (this.isNeg == true && r.length() - 1 < 4){
+        // check to see if format is necessary
+        if (this.isNeg == true && r.length() - 1 < 4){
             return r;
         } else if (this.isNeg == false && r.length() < 4) {
             return r;
@@ -261,15 +274,43 @@ public class BigInt implements Comparable<BigInt> {
         } else {
             return prettyPrint;
         }
-    }
+    } 
+    
+    /* return 0 if equal, -1 if 'this' is lesser, +1 if 'this' greater */
+    @Override
+    public int compareTo(BigInt b) {
+        if (this.isNeg && !(b.isNeg)) {
+            return -1;
+        } else if (!(this.isNeg) && b.isNeg) {
+            return 1;
+        }
 
+        this.stripLeadingZeros();
+        b.stripLeadingZeros();
+
+        if (b.data.size() > this.data.size()){
+            return -1;
+        } else if (b.data.size() < this.data.size()){
+            return 1;
+        } else {
+            for (int i = 0; i <= this.data.size() - 1; i++) {
+                if (b.data.get(i) > this.data.get(i)) {
+                    return -1;
+                } else if (b.data.get(i) < this.data.get(i)){
+                    return 1;
+                }
+            }
+        }
+        return 0;
+    }
+    
     @Override
     public String toString() {
         String r = "";
         if (this.isNeg == true) {
             r = "-";
         }
-        if (this.setToZero()) {
+        if (this.checkOrSetToZero()) {
             return r = "0";
         }
         for (int i = 0; i <= data.size() - 1; i++) {
