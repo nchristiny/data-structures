@@ -19,7 +19,7 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
         if (this.isEmpty()) {
             root = tmp;  // 1 element now in LinkedList
         } else {
-            Node r = root;
+            Node<T> r = root;
             while (r.next != null) {
                 r = r.next;
             }
@@ -36,7 +36,7 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
     }
 
     public int indexOf(T val) {
-        Node r = root;
+        Node<T> r = root;
         int i = 0;
         while (r != null) {
            // while LinkedList is not empty
@@ -60,7 +60,7 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
     }
 
     public int size() {
-        Node r = root;
+        Node<T> r = root;
         int count = 1;
         if (r != null) {
             while (r.next != null) {
@@ -79,7 +79,7 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
         if (idx < 0 || idx > this.size()) {
             throw new IndexOutOfBoundsException("Index invalid");
         }
-        Node r = root;
+        Node<T> r = root;
          if (!this.isEmpty()) { // if LinkedList is not empty
             for (int i = 0; i < idx; i++) {
                 r = r.next;
@@ -116,11 +116,11 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
             root = root.next;
             return removed;
         }
-        Node r = root;
+        Node<T> r = root;
         for (int i = 0; i <= idx; i++) {
             r = r.next;
         }
-        removed = (T) r.next.data;
+        removed = r.next.data;
         r.next = r.next.next;
         return removed;
     }
@@ -130,7 +130,7 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
         if (idx < 0 || idx > this.size()) {
             throw new IndexOutOfBoundsException("Index invalid");
         }
-        Node t = new Node(val);
+        Node<T> t = new Node(val);
         if (idx == 0) {
             // edge case of inserting new node at index 0 (root)
             t.next = root;
