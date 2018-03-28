@@ -13,11 +13,11 @@ public class LinkedList implements List {
         root = null;
     }
 
-    /* Contructor from fileName */
+    /* Constructor from fileName */
     public LinkedList(String fileName) {
     }
 
-    /* Contructor from array */
+    /* Constructor from array */
     public LinkedList(int[] inputArray) {
         for (int i = 0; i <= inputArray.length - 1; i++) {
              this.add(inputArray[i]);
@@ -119,17 +119,28 @@ public class LinkedList implements List {
         if (idx < 0 || idx >= this.size()) {
             throw new IndexOutOfBoundsException("Index invalid");
         }
+        Node r = root;
+        int removed = 0;
+        // removing first node
         if (idx == 0) {
             int removed = root.data;
             root = root.next;
             return removed;
+        } else if (idx < this.size() - 1) {
+            for (int i = 0; i < idx - 1; i++) {
+                r = r.next;
+            }
+            removed = r.next.data;
+            r.next = r.next.next;
+            return removed;
         }
-        Node r = root;
+        // otherwise we are removing last node
+
         for (int i = 0; i < idx - 1; i++) {
             r = r.next;
         }
-        int removed = r.next.data;
-        r.next = r.next.next;
+        removed = this.get(this.size() - 1);
+        r.next = null;
         return removed;
     }
 

@@ -110,19 +110,29 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
         if (idx < 0 || idx >= this.size()) {
             throw new IndexOutOfBoundsException("Index invalid");
         }
+        Node<T> r = root;
         T removed = null;
+        // removing first node
         if (idx == 0) {
             removed = root.data;
             root = root.next;
             return removed;
+        } else if (idx < this.size() - 1) {
+            // removing mid nodes
+            for (int i = 0; i < idx; i++) {
+                r = r.next;
+            }
+            removed = r.next.data;
+            r.next = r.next.next;
         }
-        Node<T> r = root;
-        for (int i = 0; i <= idx; i++) {
+        // otherwise we are removing last node
+            
+        for (int i = 0; i < idx - 1; i++) {
             r = r.next;
         }
-        removed = r.next.data;
-        r.next = r.next.next;
-        return removed;
+        removed = this.get(this.size() - 1);
+        r.next = null;
+        return removed;  
     }
 
     public void insert(int idx, T val) throws IndexOutOfBoundsException {
@@ -155,12 +165,12 @@ public class LinkedList<T extends Comparable<T>> implements List<T> {
              // Continue until there are no swaps performed
             while (swapped) {
                 swapped = false;
-                Node r = root;
-                Node r2 = r.next;
+                Node<T> r = root;
+                Node<T> r2 = r.next;
                 T tmp;
                 while (r.next != null) {
                     if (r.compareTo(r2) > 0) {
-                        tmp = (T) r.data;
+                        tmp = r.data;
                         r.data = r2.data;
                         r2.data = tmp;
                         swapped = true;
