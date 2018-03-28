@@ -45,7 +45,7 @@ public class BigInt implements Comparable<BigInt> {
         data reference should be new */
         this.data = num.data;
         this.isNeg = num.isNeg;
-        this.stripLeadingZeros();
+        //this.stripLeadingZeros();
         this.checkOrSetToZero();
     }
 
@@ -196,7 +196,7 @@ public class BigInt implements Comparable<BigInt> {
         if (this.data.size() > n.data.size()) {
               // insert leading zeroes into n
             int leadingZeroes = this.data.size() - n.data.size();
-            for (int i = 0; i <= leadingZeroes; i++) {
+            for (int i = 0; i <= leadingZeroes - 1; i++) {
                 n.data.insert(0,0);
             }
         } else if (this.data.size() < n.data.size()) {

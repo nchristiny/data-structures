@@ -50,7 +50,7 @@ public class BigIntTester {
             BigInt result = new BigInt(positive5.subtract(positive3));
             System.out.print("Subtracting: (2) " + positive5 + " - " + positive3 + " = ");
             System.out.println(result);
-            BigInt test = new BigInt("+00000010");
+            BigInt test = new BigInt("+0000000");
             System.out.println(test);
             System.out.println("Goodbye!");
         } catch (IndexOutOfBoundsException e) {
