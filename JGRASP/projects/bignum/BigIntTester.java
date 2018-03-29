@@ -54,10 +54,38 @@ public class BigIntTester {
             BigInt result = new BigInt(positive5.subtract(positive3));
             System.out.print("Subtracting: (2) " + positive5 + " - " + positive3 + " = ");
             System.out.println(result);
+            
             System.out.print("Subtracting: (-2) " + positive3 + " - " + positive5 + " = ");
             BigInt result2 = new BigInt(positive3.subtract(positive5));
             System.out.println(result2);
-            BigInt test = new BigInt("-0000000");
+            
+            BigInt negative2 = new BigInt("-2");
+            BigInt negative5 = new BigInt("-5");
+            System.out.print("Subtracting two negative values: (3) " + negative2 + " - " + negative5 + " = ");
+            BigInt result3 = negative2.subtract(negative5);
+            System.out.println(result3);
+            
+            System.out.println("Subtracting two different signs: ");
+            System.out.print("Subtracting: (-7) " + negative2 + " - " + positive5 + " = ");
+            BigInt result4 = negative2.subtract(positive5);
+            System.out.println(result4);
+            
+            System.out.print("Subtracting: (8) " + positive3 + " - " + negative5 + " = ");
+            BigInt result5 = positive3.subtract(negative5);
+            System.out.println(result5);
+            
+            System.out.println("Adding two negative values of BigInt:");
+            System.out.print(negative2 + " + " + negative5 + " = (-7) ");
+            System.out.println(negative2.add(negative5));
+            
+            System.out.println("Adding two different signs:");
+            System.out.print(positive3 + " + " + negative5 + " = (-2) ");
+            System.out.println(positive3.add(negative5));
+            
+            System.out.print(negative5 + " + " + positive3 + " = (-2) ");
+            System.out.println(negative5.add(positive3));
+
+            BigInt test = new BigInt("0000000");
             System.out.println(test);
             System.out.println("Goodbye!");
         } catch (IndexOutOfBoundsException e) {

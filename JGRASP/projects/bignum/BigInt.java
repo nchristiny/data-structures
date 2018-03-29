@@ -55,8 +55,7 @@ public class BigInt implements Comparable<BigInt> {
         return b;
     }
 
-   // TODO implementing subtract and addition for different signs
-   // and multiplication, division
+   // TODO implementing multiplication, division
     public BigInt add(BigInt n) {
           //'this' + n
         int carry = 0;
@@ -75,15 +74,15 @@ public class BigInt implements Comparable<BigInt> {
         } else if (a.isNeg ^ b.isNeg) {
              // (exclusive-or) if operands have different signs
             if (a.isNeg == true) {
-                // BigInt temp = new BigInt(a);
-                // temp.isNeg = false;
-                // resultingBigInt = b.subtract(temp);
-                // return resultingBigInt;
+                BigInt temp = new BigInt(a);
+                temp.isNeg = false;
+                resultingBigInt = b.subtract(temp);
+                return resultingBigInt;
             } else {
-                // BigInt temp = new BigInt(b);
-                // temp.isNeg = false;
-                // resultingBigInt = a.subtract(temp);
-                // return resultingBigInt;
+                BigInt temp = new BigInt(b);
+                temp.isNeg = false;
+                resultingBigInt = a.subtract(temp);
+                return resultingBigInt;
             }
         }
         // else both signs are postive, keep adding as normal
@@ -116,8 +115,8 @@ public class BigInt implements Comparable<BigInt> {
     }
 
     public BigInt subtract(BigInt n) {
-          /* Subtract n from 'this', ('this'-n). flip if n greater than this and negate
-          Implementing abs to called here */
+          /* Subtract n from 'this', ('this'-n). flip if n greater than
+             this and negate. */
           boolean flip = false;
           BigInt a = new BigInt();
           BigInt b = new BigInt();
@@ -139,7 +138,6 @@ public class BigInt implements Comparable<BigInt> {
             }
             a.insertLeadingZeros(b);
             for (int i = b.data.size() - 1; i >= 0; i--) {
-                   // actually perform a - b
                 result = 0;
                 if (carry != 0) {
                     int newVal = a.data.get(i) - 1;
@@ -155,7 +153,7 @@ public class BigInt implements Comparable<BigInt> {
                 }
 
             }
-            // resultingBigInt.isNeg = a.isNeg;
+            resultingBigInt.isNeg = a.isNeg;
             if (flip == true) {
                 resultingBigInt.isNeg = !resultingBigInt.isNeg;
             }
@@ -170,7 +168,6 @@ public class BigInt implements Comparable<BigInt> {
         return resultingBigInt;
     }
     
-    // TODO refactor method
     public boolean checkOrSetToZero() {
         /* Checks if values are all zero, if so clears linked list */
         boolean allZero = true;
