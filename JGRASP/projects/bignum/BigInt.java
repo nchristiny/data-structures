@@ -45,7 +45,7 @@ public class BigInt implements Comparable<BigInt> {
         data reference should be new */
         this.data = num.data;
         this.isNeg = num.isNeg;
-        //this.stripLeadingZeros();
+        this.stripLeadingZeros();
         this.checkOrSetToZero();
     }
 
@@ -67,22 +67,22 @@ public class BigInt implements Comparable<BigInt> {
 
           //check signs
           // if both are negative, we call subtract method
-        if (this.isNeg && n.isNeg) {
-             BigInt temp = new BigInt(n);
+        if (a.isNeg && b.isNeg) {
+             BigInt temp = new BigInt(b);
              temp.isNeg = false;
-             resultingBigInt = this.subtract(temp);
+             resultingBigInt = a.subtract(temp);
              return resultingBigInt;
-        } else if (this.isNeg ^ n.isNeg) {
+        } else if (a.isNeg ^ b.isNeg) {
              // (exclusive-or) if operands have different signs
-            if (this.isNeg == true) {
-                // BigInt temp = new BigInt(this);
+            if (a.isNeg == true) {
+                // BigInt temp = new BigInt(a);
                 // temp.isNeg = false;
-                // resultingBigInt = n.subtract(temp);
+                // resultingBigInt = b.subtract(temp);
                 // return resultingBigInt;
             } else {
-                // BigInt temp = new BigInt(n);
+                // BigInt temp = new BigInt(b);
                 // temp.isNeg = false;
-                // resultingBigInt = this.subtract(temp);
+                // resultingBigInt = a.subtract(temp);
                 // return resultingBigInt;
             }
         }
@@ -112,7 +112,6 @@ public class BigInt implements Comparable<BigInt> {
         resultingBigInt.data.reverse();
         resultingBigInt.stripLeadingZeros();
         resultingBigInt.checkOrSetToZero();
-
         return resultingBigInt;
     }
 
@@ -129,14 +128,14 @@ public class BigInt implements Comparable<BigInt> {
           if (this.isNeg == n.isNeg) {
               // the signs are the same
             if (abs(this).compareTo(abs(n)) == 1) {
-                  // 'this' is greater than n
-                flip = true;
+                  // 'this' is absolute value is greater than n
+                flip = false;
                 b = this;
                 a = n;
             } else {
-                flip = false;
-                b = n;
+                flip = true;
                 a = this;
+                b = n;  
             }
             a.insertLeadingZeros(b);
             for (int i = b.data.size() - 1; i >= 0; i--) {
@@ -147,7 +146,7 @@ public class BigInt implements Comparable<BigInt> {
                     a.data.set(i, newVal);
                     carry = 0;
                 }
-                result = a.data.get(i) - b.data.get(i);
+                result = b.data.get(i) - a.data.get(i);
                 if (result >= 0) {
                     resultingBigInt.data.add(result);
                 } else {
@@ -157,21 +156,21 @@ public class BigInt implements Comparable<BigInt> {
 
             }
             // resultingBigInt.isNeg = a.isNeg;
-            if (flip = true) {
+            if (flip == true) {
                 resultingBigInt.isNeg = !resultingBigInt.isNeg;
             }
             resultingBigInt.data.reverse();
         } else {
               // the signs are different
-            resultingBigInt = abs(n).add(abs(this));
+            resultingBigInt = n.add(this);
             resultingBigInt.isNeg = this.isNeg;
         }
-        // strip leading zeros
         resultingBigInt.stripLeadingZeros();
         resultingBigInt.checkOrSetToZero();
         return resultingBigInt;
     }
     
+    // TODO refactor method
     public boolean checkOrSetToZero() {
         /* Checks if values are all zero, if so clears linked list */
         boolean allZero = true;
@@ -202,7 +201,7 @@ public class BigInt implements Comparable<BigInt> {
         } else if (this.data.size() < n.data.size()) {
               // insert leading zeroes into 'this'
             int leadingZeroes = n.data.size() - this.data.size();
-            for (int i = 0; i <= leadingZeroes; i++) {
+            for (int i = 0; i <= leadingZeroes - 1; i++) {
                 this.data.insert(0,0);
             }
         }
@@ -228,16 +227,17 @@ public class BigInt implements Comparable<BigInt> {
         } else if (this.isNeg == false) {
             len = this.toString().length();
         }
-        
-        if (len != newString.length()) {
-        
+        if (len != newString.length()) {  
             int diff = len - newString.length();  
             // remove all linked list nodes up to non zero index 
-            for (int j = 0; j < diff - 1; j++) {
-                this.data.remove(j);
+            for (int j = 0; j < diff; j++) {
+                if (j == newString.length() - 1) {
+                    checkOrSetToZero();
+                } else {
+                    this.data.remove(0);
+                }
             }
-        }
-    
+        }  
     }
 
     public String toFormattedString() {
@@ -283,22 +283,13 @@ public class BigInt implements Comparable<BigInt> {
             return -1;
         } else if (!(this.isNeg) && b.isNeg) {
             return 1;
-        }
-
-        this.stripLeadingZeros();
-        b.stripLeadingZeros();
-
-        if (b.data.size() > this.data.size()){
-            return -1;
-        } else if (b.data.size() < this.data.size()){
-            return 1;
-        } else {
-            for (int i = 0; i <= this.data.size() - 1; i++) {
-                if (b.data.get(i) > this.data.get(i)) {
-                    return -1;
-                } else if (b.data.get(i) < this.data.get(i)){
-                    return 1;
-                }
+        }  
+        this.insertLeadingZeros(b);
+        for (int i = 0; i <= this.data.size() - 1; i++) {
+            if (b.data.get(i) > this.data.get(i)) {
+                return -1;
+            } else if (b.data.get(i) < this.data.get(i)){
+                return 1;
             }
         }
         return 0;

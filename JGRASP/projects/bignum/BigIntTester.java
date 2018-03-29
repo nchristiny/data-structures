@@ -6,8 +6,9 @@ public class BigIntTester {
             BigInt myNum = new BigInt("12345");
             BigInt myNum2 = new BigInt("-12345");
             BigInt myNum3 = new BigInt("+0000001243523452345234522345");
-            BigInt myNum01 = new BigInt("00000123");
+            BigInt myNum01 = new BigInt("000001234");
             BigInt myNum02 = new BigInt("-0012341293487192857623948756293487562938457236046981406");
+
             System.out.println("Constructed from String:");
             System.out.println(myNum);
             System.out.println(myNum2);
@@ -20,9 +21,9 @@ public class BigIntTester {
             System.out.println("Constructed from BigNum:");
             BigInt duplicatedBigInt = new BigInt(myNum02);
             System.out.println(duplicatedBigInt.toFormattedString());
-            
+
             System.out.println("Adding two positive BigInt:");
-            System.out.print(myNum + " + (myNum01)" + myNum01 + " = (12,468) ");
+            System.out.print(myNum + " + (myNum01)" + myNum01 + " = (13579) ");
             System.out.println(myNum.add(myNum01));
             System.out.println("myNum01 mutated after above operation:");
             System.out.println(myNum01);
@@ -32,7 +33,7 @@ public class BigIntTester {
             System.out.println("Compare: ");
             System.out.print(myNum + ".compareTo(" + myNum01 + "): ");
             System.out.println(myNum.compareTo(myNum01));
-            BigInt bigLittle = new BigInt("-000000000123");
+            BigInt bigLittle = new BigInt("000000000123");
 
             System.out.print(bigLittle + ".compareTo(" + myNum + "): ");
             System.out.println(bigLittle.compareTo(myNum));
@@ -43,14 +44,20 @@ public class BigIntTester {
 
             System.out.print("Subtracting two postive values: " + myNum + " - " + myNum + " = ");
             System.out.println(myNum.subtract(myNum));
-            System.out.print("Subtracting: (12,222) " + myNum + " - " + myNum01 + " = ");
+            System.out.print("Subtracting: (11111) " + myNum + " - " + myNum01 + " = ");
             System.out.println(myNum.subtract(myNum01));
+
+            System.out.print("Subtracting: (-11,111) " + myNum01 + " - " + myNum + " = ");
+            System.out.println(myNum01.subtract(myNum));
             BigInt positive5 = new BigInt("5");
             BigInt positive3 = new BigInt("3");
             BigInt result = new BigInt(positive5.subtract(positive3));
             System.out.print("Subtracting: (2) " + positive5 + " - " + positive3 + " = ");
             System.out.println(result);
-            BigInt test = new BigInt("+0000000");
+            System.out.print("Subtracting: (-2) " + positive3 + " - " + positive5 + " = ");
+            BigInt result2 = new BigInt(positive3.subtract(positive5));
+            System.out.println(result2);
+            BigInt test = new BigInt("-0000000");
             System.out.println(test);
             System.out.println("Goodbye!");
         } catch (IndexOutOfBoundsException e) {
