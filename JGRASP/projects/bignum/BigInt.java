@@ -48,7 +48,6 @@ public class BigInt implements Comparable<BigInt> {
         this.data = num.data;
         this.isNeg = num.isNeg;
         this.stripLeadingZeros();
-        this.checkOrSetToZero();
     }
 
     public BigInt abs(BigInt a) {
@@ -111,7 +110,6 @@ public class BigInt implements Comparable<BigInt> {
         }
         resultingBigInt.data.reverse();
         resultingBigInt.stripLeadingZeros();
-        resultingBigInt.checkOrSetToZero();
         return resultingBigInt;
     }
 
@@ -165,7 +163,6 @@ public class BigInt implements Comparable<BigInt> {
             resultingBigInt.isNeg = this.isNeg;
         }
         resultingBigInt.stripLeadingZeros();
-        resultingBigInt.checkOrSetToZero();
         return resultingBigInt;
     }
     
@@ -240,7 +237,7 @@ public class BigInt implements Comparable<BigInt> {
             // remove all linked list nodes up to non zero index 
             for (int j = 0; j < diff; j++) {
                 if (j == newString.length() - 1) {
-                    checkOrSetToZero();
+                    this.checkOrSetToZero();
                 } else {
                     this.data.remove(0);
                 }
