@@ -5,6 +5,8 @@ import collections.list.generics.LinkedList;
 public class BigInt implements Comparable<BigInt> {
     LinkedList<Integer>  data = new LinkedList<>();
     boolean              isNeg;
+    static final BigInt ZERO = new BigInt("0");
+    static final BigInt ONE = new BigInt("1");
 
     public BigInt() {
         /* set data and isNeg flag */
@@ -55,7 +57,6 @@ public class BigInt implements Comparable<BigInt> {
         return b;
     }
 
-   // TODO implementing multiplication, division
     public BigInt add(BigInt n) {
           //'this' + n
         int carry = 0;
@@ -168,7 +169,18 @@ public class BigInt implements Comparable<BigInt> {
         return resultingBigInt;
     }
     
-    public boolean checkOrSetToZero() {
+    // TODO implementing multiplication, division
+    public BigInt multiply(BigInt n) {
+        /* this times n.
+           For example, 3 times 5 implies 5 added three times */
+        if((n.compareTo(ZERO) == 0) || (this.compareTo(ZERO) == 0)) {
+            return ZERO;
+        }
+        return (this.add(this.multiply(n.subtract(ONE))));
+    }
+    
+    // TODO Refactor SRP code smell: OR in method name
+    private boolean checkOrSetToZero() {
         /* Checks if values are all zero, if so clears linked list */
         boolean allZero = true;
         if (!(this.data.isEmpty())) {
@@ -179,7 +191,6 @@ public class BigInt implements Comparable<BigInt> {
             }
         }
         this.data.clear();
-        // this.data.add(0);
         this.isNeg = false;
         return allZero;
     }   
@@ -217,7 +228,7 @@ public class BigInt implements Comparable<BigInt> {
         }
         newString = newString.substring(i);
         
-        // Instead of creating a new BigInt (costly) we will modify existing
+        // Instead of creating a new BigInt (costly) modify existing
         int len = 0;
         if (this.isNeg == true) {
             len = this.toString().length() - 1;
@@ -280,7 +291,7 @@ public class BigInt implements Comparable<BigInt> {
             return -1;
         } else if (!(this.isNeg) && b.isNeg) {
             return 1;
-        }  
+        }
         this.insertLeadingZeros(b);
         for (int i = 0; i <= this.data.size() - 1; i++) {
             if (b.data.get(i) > this.data.get(i)) {
