@@ -11,7 +11,7 @@ public class BigInt implements Comparable<BigInt> {
     public BigInt() {
         /* set data and isNeg flag */
         this.isNeg = false;
-        this.checkOrSetToZero();
+        this.checkForZero();
     }
 
    //eg "12341293487192857623948756293487562938457236046981406"
@@ -39,7 +39,7 @@ public class BigInt implements Comparable<BigInt> {
             int digit = Character.getNumericValue(newNum.charAt(i));
             data.add(digit);
         }
-        this.checkOrSetToZero();
+        this.checkForZero();
     }
 
     public BigInt(BigInt num) {
@@ -68,7 +68,7 @@ public class BigInt implements Comparable<BigInt> {
           // if both are negative, we call subtract method
         if (a.isNeg && b.isNeg) {
              BigInt temp = new BigInt(b);
-             temp.isNeg = false;
+             //temp.isNeg = false;
              resultingBigInt = a.subtract(temp);
              return resultingBigInt;
         } else if (a.isNeg ^ b.isNeg) {
@@ -150,7 +150,6 @@ public class BigInt implements Comparable<BigInt> {
                     resultingBigInt.data.add(result + 10);
                     carry = 1;
                 }
-
             }
             resultingBigInt.isNeg = a.isNeg;
             if (flip == true) {
@@ -173,11 +172,11 @@ public class BigInt implements Comparable<BigInt> {
         if((n.compareTo(ZERO) == 0) || (this.compareTo(ZERO) == 0)) {
             return ZERO;
         }
-        return (this.add(this.multiply(n.subtract(ONE))));
+        // compiles and runs but gives incorrect answer
+        return (this.add(this.multiply(n.subtract(ONE))));  
     }
     
-    // TODO Refactor SRP code smell: OR in method name
-    private boolean checkOrSetToZero() {
+    private boolean checkForZero() {
         /* Checks if values are all zero, if so clears linked list */
         boolean allZero = true;
         if (!(this.data.isEmpty())) {
@@ -237,7 +236,7 @@ public class BigInt implements Comparable<BigInt> {
             // remove all linked list nodes up to non zero index 
             for (int j = 0; j < diff; j++) {
                 if (j == newString.length() - 1) {
-                    this.checkOrSetToZero();
+                    this.checkForZero();
                 } else {
                     this.data.remove(0);
                 }
@@ -306,7 +305,7 @@ public class BigInt implements Comparable<BigInt> {
         if (this.isNeg == true) {
             r = "-";
         }
-        if (this.checkOrSetToZero()) {
+        if (this.checkForZero()) {
             return r = "0";
         }
         for (int i = 0; i <= data.size() - 1; i++) {
@@ -314,5 +313,4 @@ public class BigInt implements Comparable<BigInt> {
         }
         return r;
     }
-
 }
