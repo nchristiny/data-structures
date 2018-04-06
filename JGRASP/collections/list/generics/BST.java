@@ -33,12 +33,26 @@ public class BST<T extends Comparable<T>> implements BSTInt<T> {
         }
     }
     
+    public int size() {
+        return size(root);
+    }
+    
+    public int size(BSTNode<T> r) {
+        if (r == null){
+            return 0;
+        }
+        return 1 + size(r.right) + size(r.left);
+    }
+    
     public static void main(String[] args) {
         BST<Integer> bst = new BST<>();
-        System.out.println(bst);
-        bst.add(12);
-        bst.add(22);
-        bst.add(7);
-        System.out.println(bst.root);
+        System.out.println("Size of binary search tree before adding: ");
+        System.out.println(bst.size());
+        for (int i = 0; i < 31; i++) {
+            int rnd = (int)(Math.random() * 10000) + 1;
+            bst.add(rnd);
+        }
+        System.out.println("Size of binary search tree after adding: ");
+        System.out.println(bst.size());
     }
 }
