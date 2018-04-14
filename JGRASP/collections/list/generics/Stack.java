@@ -22,18 +22,4 @@ public class Stack<T extends Comparable<T>> {
     public boolean isEmpty() {
         return data.size() == 0;
     }
-    
-    public static void main(String[] args) {
-        Stack s = new Stack();
-        System.out.println("Pushing");
-        for (int i = 0; i < 5; i++) {
-            System.out.print(i +  " ");
-            s.push(i);
-        }
-        System.out.println("\n----");
-        System.out.println("Popping");
-        while(s.isEmpty() == false) {
-            System.out.print(s.pop() + " ");
-        }
-    }
 }

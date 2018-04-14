@@ -68,7 +68,7 @@ public class BigInt implements Comparable<BigInt> {
           // if both are negative, we call subtract method
         if (a.isNeg && b.isNeg) {
              BigInt temp = new BigInt(b);
-             //temp.isNeg = false;
+             temp.isNeg = false;  
              resultingBigInt = a.subtract(temp);
              return resultingBigInt;
         } else if (a.isNeg ^ b.isNeg) {

@@ -49,7 +49,7 @@ public class BST<T extends Comparable<T>> implements BSTInt<T> {
         System.out.println("Size of binary search tree before adding: ");
         System.out.println(bst.size());
         for (int i = 0; i < 31; i++) {
-            int rnd = (int)(Math.random() * 10000) + 1;
+            int rnd = (int)(Math.random() * 50) + 1;
             bst.add(rnd);
         }
         System.out.println("Size of binary search tree after adding: ");

@@ -64,7 +64,7 @@ public class BigIntTester {
             System.out.print("Subtracting two negative values: (3) " + negative2 + " - " + negative5 + " = ");
             BigInt result3 = negative2.subtract(negative5);
             System.out.println(result3);
-
+            System.out.println("*********************************");
             System.out.println("Subtracting two different signs: ");
             System.out.print("Subtracting: (-7) " + negative2 + " - " + positive5 + " = ");
             BigInt result4 = negative2.subtract(positive5);
