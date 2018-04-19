@@ -64,7 +64,6 @@ public class BigIntTester {
             System.out.print("Subtracting two negative values: (3) " + negative2 + " - " + negative5 + " = ");
             BigInt result3 = negative2.subtract(negative5);
             System.out.println(result3);
-            System.out.println("*********************************");
             negative2 = new BigInt("-2");
             positive5 = new BigInt("5");
             System.out.println("Subtracting two different signs: ");
@@ -85,7 +84,6 @@ public class BigIntTester {
             System.out.println("Adding two negative values of BigInt:");
             System.out.print(negative2 + " + " + negative5 + " = (-7) ");
             System.out.println(negative2.add(negative5));
-            System.out.println("*********************************");
 
             System.out.println("Adding two different signs:");
             System.out.print(positive3 + " + " + negative5 + " = (-2) ");
@@ -99,6 +97,9 @@ public class BigIntTester {
             positive5 = new BigInt("5");
             System.out.print("Multiplying: " + positive3 + " * " + positive5 + " = (15) ");
             System.out.println(positive3.multiply(positive5));
+            myNum = new BigInt("123456");
+            System.out.println("Multiplying BigInt by single digit Integer: " + myNum + " * 9(int) = (Expected: 1,111,104) ");
+            System.out.println(myNum.multiply(9).toFormattedString());
 
             BigInt test = new BigInt("0000000");
             System.out.println(test);

@@ -1,6 +1,7 @@
 package projects.bignum;
 
 import collections.list.generics.LinkedList;
+import collections.list.generics.Stack;
 
 public class BigInt implements Comparable<BigInt> {
     LinkedList<Integer>  data = new LinkedList<>();
@@ -169,15 +170,59 @@ public class BigInt implements Comparable<BigInt> {
     
     // TODO implementing multiplication, division
     // USE A STACK TO PUSH RESULT - may not need recursive "smart" answer,
-    // especially for big BigInt
+    // especially for large BigInt
     public BigInt multiply(BigInt n) {
         /* this times n.
            For example, 3 times 5 implies 5 added three times */
-        if((n.compareTo(ZERO) == 0) || (this.compareTo(ZERO) == 0)) {
-            return ZERO;
-        }
-        // compiles and runs but gives incorrect answer
-        return (this.add(this.multiply(n.subtract(ONE))));  
+//         if((n.compareTo(ZERO) == 0) || (this.compareTo(ZERO) == 0)) {
+//             return ZERO;
+//         }
+//         // compiles and runs but gives incorrect answer
+//         return (this.add(this.multiply(n.subtract(ONE))));  
+
+        // Implementing multiply with Stack 
+        BigInt resultingBigInt = new BigInt();
+
+        Stack<BigInt> holding = new Stack<>();        
+        // Need to implement BigInt multiply(int n) first
+        
+        
+        return resultingBigInt;
+
+    }
+    
+    public BigInt multiply(int n) throws IllegalArgumentException {
+        /* Multiply BigInt by single-digit integer from 0-9,
+           We call this from multiply BigInt by BigInt.
+           If n is 10 or higher, may need to convert to BigInt */
+        if (n < 0 || n >= 10) {
+            throw new IllegalArgumentException("Multiplying Integer must be from 0 to 9!");
+        }     
+        int result = 0;
+        int carry = 0;
+        BigInt resultingBigInt = new BigInt();
+        
+        for (int i = this.data.size() - 1; i >= 0; i--) {
+            result = 0;
+            if (carry != 0) {
+               result += carry;
+               carry = 0;
+            }
+            result += this.data.get(i) * n;
+            if (result < 10) {
+                resultingBigInt.data.add(result);
+            } else {
+                if (i != 0) {  
+                    carry =  result / 10;   
+                    result = result % 10;
+                    resultingBigInt.data.add(result);
+                } else {
+                    resultingBigInt.data.add(result);
+                }
+            }   
+        }   
+        resultingBigInt.data.reverse();    
+        return resultingBigInt;
     }
     
     private boolean checkForZero() {
