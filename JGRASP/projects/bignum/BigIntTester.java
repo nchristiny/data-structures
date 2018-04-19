@@ -93,13 +93,15 @@ public class BigIntTester {
             System.out.println(negative5.add(positive3));
 
             System.out.println("*********************************");
-            positive3 = new BigInt("3");
-            positive5 = new BigInt("5");
-            System.out.print("Multiplying: " + positive3 + " * " + positive5 + " = (15) ");
-            System.out.println(positive3.multiply(positive5));
             myNum = new BigInt("123456");
             System.out.println("Multiplying BigInt by single digit Integer: " + myNum + " * 9(int) = (Expected: 1,111,104) ");
             System.out.println(myNum.multiply(9).toFormattedString());
+            BigInt oper1 = new BigInt("123456");
+            BigInt oper2 = new BigInt("789");
+            System.out.println("Multiplying two BigInt: " + oper1 + " * " + oper2 + " = (expected: 97,406,784)");
+            System.out.println(oper1.multiply(oper2).toFormattedString());
+            
+            System.out.println("*********************************");
 
             BigInt test = new BigInt("0000000");
             System.out.println(test);

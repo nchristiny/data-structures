@@ -182,13 +182,27 @@ public class BigInt implements Comparable<BigInt> {
 
         // Implementing multiply with Stack 
         BigInt resultingBigInt = new BigInt();
-
+        BigInt operandBigInt = new BigInt(this);
         Stack<BigInt> holding = new Stack<>();        
         // Need to implement BigInt multiply(int n) first
-        
-        
-        return resultingBigInt;
-
+        // OK now we need to loop through data of n, mulitplying this with zeros left-shifted
+        // i.e first step is 123456 * 9 then 1234560 * 8 and 12345600 * 7 then add them
+        for (int i = n.data.size() - 1; i >= 0; i--) {
+            int digit = n.data.get(i);
+            // right-padding operandBigInt by the correct number of zeros
+            if (i < n.data.size() - 1) {
+                operandBigInt.data.add(0);
+            }            
+            // multiply operandBigInt by the first integer digit of n
+            resultingBigInt = operandBigInt.multiply(digit);
+            holding.push(resultingBigInt);           
+        }
+        // add up values of holding Stack
+        BigInt grandTotal = new BigInt();
+        while (!holding.isEmpty()) {
+            grandTotal = grandTotal.add(holding.pop());
+        }
+        return grandTotal;
     }
     
     public BigInt multiply(int n) throws IllegalArgumentException {
@@ -217,11 +231,16 @@ public class BigInt implements Comparable<BigInt> {
                     result = result % 10;
                     resultingBigInt.data.add(result);
                 } else {
+                    // After we multiply by this manner, may leave double-digit integer values in head node
+                    // Must "flatten" head node into single digits
+                    carry =  result / 10;
+                    result = result % 10;
                     resultingBigInt.data.add(result);
+                    resultingBigInt.data.add(carry);
                 }
             }   
         }   
-        resultingBigInt.data.reverse();    
+        resultingBigInt.data.reverse();          
         return resultingBigInt;
     }
     
