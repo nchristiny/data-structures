@@ -157,8 +157,10 @@ public class BigInt implements Comparable<BigInt> {
             }
             resultingBigInt.data.reverse();
         } else {
-              // the signs are different
-            resultingBigInt = n.add(this);
+            // the signs are different
+            a = this;
+            b = n;
+            resultingBigInt = abs(a).add(abs(b));
             resultingBigInt.isNeg = this.isNeg;
         }
         resultingBigInt.stripLeadingZeros();
@@ -166,6 +168,8 @@ public class BigInt implements Comparable<BigInt> {
     }
     
     // TODO implementing multiplication, division
+    // USE A STACK TO PUSH RESULT - may not need recursive "smart" answer,
+    // especially for big BigInt
     public BigInt multiply(BigInt n) {
         /* this times n.
            For example, 3 times 5 implies 5 added three times */

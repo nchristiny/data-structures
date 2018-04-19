@@ -65,18 +65,27 @@ public class BigIntTester {
             BigInt result3 = negative2.subtract(negative5);
             System.out.println(result3);
             System.out.println("*********************************");
+            negative2 = new BigInt("-2");
+            positive5 = new BigInt("5");
             System.out.println("Subtracting two different signs: ");
             System.out.print("Subtracting: (-7) " + negative2 + " - " + positive5 + " = ");
             BigInt result4 = negative2.subtract(positive5);
             System.out.println(result4);
+            
+            positive3 = new BigInt("3");
+            negative5 = new BigInt("-5");
 
             System.out.print("Subtracting: (8) " + positive3 + " - " + negative5 + " = ");
             BigInt result5 = positive3.subtract(negative5);
             System.out.println(result5);
+            
+            negative2 = new BigInt("-2");
+            negative5 = new BigInt("-5");
 
             System.out.println("Adding two negative values of BigInt:");
             System.out.print(negative2 + " + " + negative5 + " = (-7) ");
             System.out.println(negative2.add(negative5));
+            System.out.println("*********************************");
 
             System.out.println("Adding two different signs:");
             System.out.print(positive3 + " + " + negative5 + " = (-2) ");
@@ -85,6 +94,9 @@ public class BigIntTester {
             System.out.print(negative5 + " + " + positive3 + " = (-2) ");
             System.out.println(negative5.add(positive3));
 
+            System.out.println("*********************************");
+            positive3 = new BigInt("3");
+            positive5 = new BigInt("5");
             System.out.print("Multiplying: " + positive3 + " * " + positive5 + " = (15) ");
             System.out.println(positive3.multiply(positive5));
 
