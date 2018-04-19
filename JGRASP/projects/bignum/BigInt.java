@@ -111,6 +111,7 @@ public class BigInt implements Comparable<BigInt> {
         }
         resultingBigInt.data.reverse();
         resultingBigInt.stripLeadingZeros();
+        resultingBigInt.flatten();
         return resultingBigInt;
     }
 
@@ -168,25 +169,24 @@ public class BigInt implements Comparable<BigInt> {
         return resultingBigInt;
     }
     
-    // TODO implementing multiplication, division
-    // USE A STACK TO PUSH RESULT - may not need recursive "smart" answer,
-    // especially for large BigInt
+    // TODO implement division
+    // USE A STACK TO PUSH RESULT - recursive "smart" answer, is not practical for large BigInt
     public BigInt multiply(BigInt n) {
-        /* this times n.
-           For example, 3 times 5 implies 5 added three times */
+        /* this times n. Implement BigInt multiply(int n) first
+           Loop through data of n, mulitplying each digit with right-padded 'this'
+           i.e 123456 * 9 then 1234560 * 8 and 12345600 * 7, add all for grand total */
+           
+//         // Recursive solution (deprecated)
 //         if((n.compareTo(ZERO) == 0) || (this.compareTo(ZERO) == 0)) {
 //             return ZERO;
 //         }
 //         // compiles and runs but gives incorrect answer
 //         return (this.add(this.multiply(n.subtract(ONE))));  
 
-        // Implementing multiply with Stack 
         BigInt resultingBigInt = new BigInt();
         BigInt operandBigInt = new BigInt(this);
         Stack<BigInt> holding = new Stack<>();        
-        // Need to implement BigInt multiply(int n) first
-        // OK now we need to loop through data of n, mulitplying this with zeros left-shifted
-        // i.e first step is 123456 * 9 then 1234560 * 8 and 12345600 * 7 then add them
+        
         for (int i = n.data.size() - 1; i >= 0; i--) {
             int digit = n.data.get(i);
             // right-padding operandBigInt by the correct number of zeros
@@ -233,6 +233,7 @@ public class BigInt implements Comparable<BigInt> {
                 } else {
                     // After we multiply by this manner, may leave double-digit integer values in head node
                     // Must "flatten" head node into single digits
+                    // expanding this method out to class
                     carry =  result / 10;
                     result = result % 10;
                     resultingBigInt.data.add(result);
@@ -242,6 +243,21 @@ public class BigInt implements Comparable<BigInt> {
         }   
         resultingBigInt.data.reverse();          
         return resultingBigInt;
+    }
+    
+    private BigInt flatten() {
+        /* Makes each data node a single-digit int */
+        BigInt resultingBigInt = new BigInt(this);
+        resultingBigInt.data.reverse();
+        int newVal = 0;
+        for (int i = 0; i <= this.data.size() - 1; i++) {
+            if (this.data.get(i) >= 10) {
+                this.data.set(i, this.data.get(i) % 10);
+                this.data.insert(i + 1, this.data.get(i) / 10);
+            }
+        }
+        resultingBigInt.data.reverse();
+        return resultingBigInt;     
     }
     
     private boolean checkForZero() {
