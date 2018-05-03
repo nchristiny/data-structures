@@ -68,7 +68,8 @@ public class RecursionPractice
    
    public static long factorial(int n)
    {
-      return 0;
+      if (n <= 1) return 1;
+      else return factorial(n - 1) * n;
    }
    
    public static int fibCount = 0;
@@ -76,8 +77,9 @@ public class RecursionPractice
    {
       fibCount++;
       
-      
-      return 0;
+      if (n == 0) return 0;
+      if (n == 1) return 1;
+      else return fibonacci(n - 1) + fibonacci(n - 2);
    }
    
    public static void towersOfHanoi(int n, int start, int end, int aux)
@@ -97,7 +99,8 @@ public class RecursionPractice
    /*   you can assume s is less than or equal to n to start */
    public static int sum(int s, int n)
    {
-      return 0;
+      if (s == n) return 0;
+      else return sum(s, n - 1);
    }
    
    /* this method is done, it simply calls the recursive method */
@@ -132,7 +135,7 @@ public class RecursionPractice
    {
       if (r == 0 && c == 0) return 0;
       if (r == 0 || c == 0) return 1;
-      long numPaths = numPaths(r-1,c) + numPaths(r,c-1);
+      long numPaths = numPaths(r - 1, c) + numPaths(r, c - 1);
       return numPaths;
    }
    
